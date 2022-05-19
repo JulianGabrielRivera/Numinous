@@ -11,23 +11,26 @@ const EditProfile = () => {
 
   // const [userData, setUserData] = useState({});
 
-  const { id } = useParams();
-  console.log(id);
   const handleEmail = (e) => setEmail(e.target.value);
   const handleName = (e) => setName(e.target.value);
 
   const handlePassword = (e) => setPassword(e.target.value);
 
+  const storedToken = localStorage.getItem('authToken');
+
   const { user } = useContext(AuthContext);
   // console.log(user);
   // console.log(user._id);
-  const userID = user._id;
-  console.log(userID);
+  // const userID = user._id;
+  // console.log(userID);
   useEffect(() => {
     axios
-      .get(`${APIURL}/api/user/${userID}`)
+      .get(`${APIURL}/api/user`, {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      })
       .then((response) => {
-        console.log(response.data.name);
         const userProfile = response.data;
         setEmail(userProfile.email);
         setName(userProfile.name);
@@ -41,14 +44,19 @@ const EditProfile = () => {
         // setPlacesDataClone([...response.data.message]);
       })
       .catch((err) => console.log(err));
-  }, [userID]);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const requestBody = { name, password, email };
 
     axios
-      .put(`${APIURL}/api/user/${user._id}`, requestBody)
+      .put(`${APIURL}/api/user`, requestBody, {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      })
+
       .then((response) => {
         console.log(response);
       })

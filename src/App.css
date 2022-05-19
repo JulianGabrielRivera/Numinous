@@ -94,6 +94,7 @@ body {
   height: 500px;
   width: 500px;
   border: 2.5px solid #343a40;
+  border-radius: 7px;
 }
 
 .placeCreateContainer {

@@ -17,6 +17,7 @@ import IsAdmin from './components/IsAdmin';
 import Video from './components/Video';
 import axios from 'axios';
 import EditProfile from './pages/EditProfile';
+const API_URL = process.env.REACT_APP_SERVER_URL;
 
 function App() {
   const [placesData, setPlacesData] = useState([]);
@@ -34,7 +35,7 @@ function App() {
   // };
 
   useEffect(() => {
-    axios.get('http://localhost:5005/api/places').then((response) => {
+    axios.get(`${API_URL}/api/places`).then((response) => {
       console.log(response.data.message);
 
       setPlacesData([...response.data.message]);
@@ -45,7 +46,7 @@ function App() {
 
   //  shouldnt have 2 effect hooks pass the original state, add new place .. original state, newplace
   useEffect(() => {
-    axios.get('http://localhost:5005/api/places').then((response) => {
+    axios.get(`${API_URL}/api/places`).then((response) => {
       setPlacesData([...response.data.message]);
       console.log(response.data.message);
     });

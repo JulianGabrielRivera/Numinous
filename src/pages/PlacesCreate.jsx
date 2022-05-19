@@ -23,11 +23,13 @@ const PlacesCreate = (props) => {
   const handleRating = (e) => setRating(e.target.value);
   const handleContinent = (e) => setContinent(e.target.value);
 
+  const APIURL = process.env.REACT_APP_SERVER_URL;
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const requestBody = { name, img, description, rating, continent };
     axios
-      .post('http://localhost:5005/api/places/create', requestBody, {
+      .post(`${APIURL}/api/places/create`, requestBody, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {

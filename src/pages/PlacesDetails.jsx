@@ -5,6 +5,7 @@ import Rating from '../components/Rating';
 import axios from 'axios';
 
 import { AuthContext } from '../context/auth.context';
+const APIURL = process.env.REACT_APP_SERVER_URL;
 {
   /* <img
 src={placeData.img}
@@ -12,6 +13,7 @@ alt=''
 style={{ height: '400px', width: '100vw', padding: '10px' }}
 /> */
 }
+
 const styledX = {
   backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M6 18L18 6M6 6l12 12' /%3E%3C/svg%3E")`,
 };
@@ -36,7 +38,7 @@ const PlacesDetails = (props) => {
     const requestBody = { content };
 
     axios
-      .post(`http://localhost:5005/api/comments/${id}`, requestBody, {
+      .post(`${APIURL}/api/comments/${id}`, requestBody, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
@@ -56,7 +58,7 @@ const PlacesDetails = (props) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5005/api/places/${id}`)
+      .get(`${APIURL}/api/places/${id}`)
       .then((response) => {
         console.log(response.data);
         setPlaceData(response.data);

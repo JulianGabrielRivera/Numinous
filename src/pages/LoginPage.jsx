@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/auth.context';
 
+const API_URL = process.env.REACT_APP_SERVER_URL;
 const LoginPage = (props) => {
   // set the state so wehn you get into the page it will be blank with no values
   const [email, setEmail] = useState('');
@@ -26,7 +27,7 @@ const LoginPage = (props) => {
     const requestBody = { email, password };
     // this url is the direction we set up on the back end and passing it the object with the values of email and password once user is logged in
     axios
-      .post('http://localhost:5005/auth/login', requestBody)
+      .post(`${API_URL}/auth/login`, requestBody)
       .then((response) => {
         storeToken(response.data.authToken);
         authenticateUser();

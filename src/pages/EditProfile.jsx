@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
-
+const APIURL = process.env.REACT_APP_SERVER_URL;
 const EditProfile = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -25,7 +25,7 @@ const EditProfile = () => {
   console.log(userID);
   useEffect(() => {
     axios
-      .get(`http://localhost:5005/api/user/${userID}`)
+      .get(`${APIURL}/api/user/${userID}`)
       .then((response) => {
         console.log(response.data.name);
         const userProfile = response.data;
@@ -48,7 +48,7 @@ const EditProfile = () => {
     const requestBody = { name, password, email };
 
     axios
-      .put(`http://localhost:5005/api/user/${user._id}`, requestBody)
+      .put(`${APIURL}/api/user/${user._id}`, requestBody)
       .then((response) => {
         console.log(response);
       })
@@ -76,7 +76,7 @@ const EditProfile = () => {
           <input type='text' name='name' value={name} onChange={handleName} />
           <label htmlFor=''>Password:</label>
           <input
-            type='text'
+            type='password'
             name='password'
             value={password}
             onChange={handlePassword}

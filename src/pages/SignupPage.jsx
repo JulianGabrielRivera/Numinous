@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-
+const APIURL = process.env.REACT_APP_SERVER_URL;
 const SignupPage = () => {
   // storing the values for each here
   const [email, setEmail] = useState('');
@@ -30,7 +30,7 @@ const SignupPage = () => {
 
     // we are sending our body to the back, using the route we named it in the backend here then wwhen we get the response from the back end we navigate to the login page
     axios
-      .post('http://localhost:5005/auth/signup', requestBody)
+      .post(`${APIURL}/auth/signup`, requestBody)
       .then((response) => {
         console.log(response);
         navigate('/login');
@@ -67,7 +67,7 @@ const SignupPage = () => {
           <label htmlFor='passwordClick'>Password:</label>
           {/* ask about value and name */}
           <input
-            type='text'
+            type='password'
             name='password'
             value={password}
             onChange={handlePassword}

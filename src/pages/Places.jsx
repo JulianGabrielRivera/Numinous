@@ -8,7 +8,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 import { AuthContext } from '../context/auth.context';
 import Rating from '../components/Rating';
-
+const APIURL = process.env.REACT_APP_SERVER_URL;
 const Places = (props) => {
   const { data, setState } = props;
   const { storedToken } = useContext(AuthContext);
@@ -72,14 +72,11 @@ const Places = (props) => {
                         e.preventDefault();
 
                         axios
-                          .delete(
-                            `http://localhost:5005/api/places/${place._id}`,
-                            {
-                              headers: {
-                                Authorization: `Bearer ${storedToken}`,
-                              },
-                            }
-                          )
+                          .delete(`${APIURL}/api/places/${place._id}`, {
+                            headers: {
+                              Authorization: `Bearer ${storedToken}`,
+                            },
+                          })
                           .then((response) => {
                             console.log(response);
 

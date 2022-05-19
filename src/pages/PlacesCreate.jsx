@@ -5,7 +5,7 @@ import { AuthContext } from '../context/auth.context';
 
 const PlacesCreate = (props) => {
   const [name, setName] = useState('');
-  const [img, setImg] = useState('');
+  const [url, setUrl] = useState('');
   const [description, setDescription] = useState('');
   const [rating, setRating] = useState(0);
   const [continent, setContinent] = useState('');
@@ -18,7 +18,7 @@ const PlacesCreate = (props) => {
 
   // lets set our handle that will have our value stored in it
   const handleName = (e) => setName(e.target.value);
-  const handleImg = (e) => setImg(e.target.value);
+  const handleUrl = (e) => setUrl(e.target.value);
   const handleDescription = (e) => setDescription(e.target.value);
   const handleRating = (e) => setRating(e.target.value);
   const handleContinent = (e) => setContinent(e.target.value);
@@ -27,7 +27,7 @@ const PlacesCreate = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const requestBody = { name, img, description, rating, continent };
+    const requestBody = { name, url, description, rating, continent };
     axios
       .post(`${APIURL}/api/places/create`, requestBody, {
         headers: { Authorization: `Bearer ${storedToken}` },
@@ -44,7 +44,7 @@ const PlacesCreate = (props) => {
         console.log(err);
       });
     setName('');
-    setImg('');
+    setUrl('');
     setDescription('');
     setRating(0);
     setContinent('');
@@ -61,7 +61,7 @@ const PlacesCreate = (props) => {
           <label htmlFor='placeName'>Name:</label>
           <input type='text' name='name' value={name} onChange={handleName} />
           <label htmlFor=''>Image:</label>
-          <input type='text' name='img' value={img} onChange={handleImg} />
+          <input type='text' name='url' value={url} onChange={handleUrl} />
 
           <label htmlFor=''>Description:</label>
           <input

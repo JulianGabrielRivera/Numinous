@@ -58,7 +58,7 @@ const Places = (props) => {
                     width: '300px',
                     height: '230px',
                     padding: '5px',
-                    backgroundImage: `url(${place.img})`,
+                    backgroundImage: `url(${place.url})`,
                     backgroundSize: 'contain',
                     backgroundRepeat: 'no-repeat',
                     borderRadius: '10px',

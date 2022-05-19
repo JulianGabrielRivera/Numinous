@@ -46,32 +46,42 @@ const SignupPage = () => {
   };
 
   return (
-    <div className='SignupPage'>
-      <h1>Sign UPPER!</h1>
+    <div className='signUpContainer'>
+      <div className='signUpContainerInfo'>
+        <h1>Sign UPPER!</h1>
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor='emailClick'>Email:</label>
-        {/* ask about value and email */}
-        {/* access by name and gets value */}
-        <input type='text' name='email' value={email} onChange={handleEmail} />
+        <form
+          onSubmit={handleSubmit}
+          style={{ display: 'flex', flexDirection: 'column', width: '200px' }}
+        >
+          <label htmlFor='emailClick'>Email:</label>
+          {/* ask about value and email */}
+          {/* access by name and gets value */}
+          <input
+            type='text'
+            name='email'
+            value={email}
+            onChange={handleEmail}
+          />
 
-        <label htmlFor='passwordClick'>Password:</label>
-        {/* ask about value and name */}
-        <input
-          type='text'
-          name='password'
-          value={password}
-          onChange={handlePassword}
-        />
+          <label htmlFor='passwordClick'>Password:</label>
+          {/* ask about value and name */}
+          <input
+            type='text'
+            name='password'
+            value={password}
+            onChange={handlePassword}
+          />
 
-        <label htmlFor='nameClick'>Name:</label>
-        <input type='text' name='name' value={name} onChange={handleName} />
-        <button type='submit'>Sign UPPER!</button>
-      </form>
+          <label htmlFor='nameClick'>Name:</label>
+          <input type='text' name='name' value={name} onChange={handleName} />
+          <button type='submit'>Sign UPPER!</button>
+        </form>
 
-      {errorMessage && <p className='error-message'>{errorMessage}</p>}
-      <p>Already have an account?</p>
-      <Link to={'/login'}>Login</Link>
+        {errorMessage && <p className='error-message'>{errorMessage}</p>}
+        <p>Already have an account?</p>
+        <Link to={'/login'}>Login</Link>
+      </div>
     </div>
   );
 };

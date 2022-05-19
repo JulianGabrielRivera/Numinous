@@ -19,6 +19,7 @@ const styledX = {
 const PlacesDetails = (props) => {
   // this is whatever is after /placedetails
   const { id } = useParams();
+
   // const { data } = props;
   // console.log(data);
   const { storedToken } = useContext(AuthContext);

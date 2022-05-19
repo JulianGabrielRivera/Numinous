@@ -16,6 +16,7 @@ import PlacesCreate from './pages/PlacesCreate';
 import IsAdmin from './components/IsAdmin';
 import Video from './components/Video';
 import axios from 'axios';
+import EditProfile from './pages/EditProfile';
 
 function App() {
   const [placesData, setPlacesData] = useState([]);
@@ -98,6 +99,14 @@ function App() {
               <IsAdmin>
                 <PlacesCreate data={placesData} setState={setPlacesDataClone} />
               </IsAdmin>
+            </IsPrivate>
+          }
+        />
+        <Route
+          path='/edit'
+          element={
+            <IsPrivate>
+              <EditProfile />
             </IsPrivate>
           }
         />

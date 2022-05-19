@@ -3,14 +3,15 @@ import redHeart from '../assets/images/heart1.png';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { XIcon } from '@heroicons/react/solid';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
+import { AuthContext } from '../context/auth.context';
 import Rating from '../components/Rating';
 
 const Places = (props) => {
   const { data, setState } = props;
-
+  const { storedToken } = useContext(AuthContext);
   return (
     <div className='imageContainer'>
       {data.map((place) => {
@@ -72,11 +73,20 @@ const Places = (props) => {
 
                         axios
                           .delete(
-                            `http://localhost:5005/api/places/${place._id}`
+                            `http://localhost:5005/api/places/${place._id}`,
+                            {
+                              headers: {
+                                Authorization: `Bearer ${storedToken}`,
+                              },
+                            }
                           )
-
                           .then((response) => {
                             console.log(response);
+
+                            // axios
+                            // .post('http://localhost:5005/api/places/create', requestBody, {
+                            //   headers: { Authorization: `Bearer ${storedToken}` },
+                            // })
 
                             // window.location.reload(false);
 

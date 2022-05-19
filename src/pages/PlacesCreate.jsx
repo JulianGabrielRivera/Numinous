@@ -32,6 +32,7 @@ const PlacesCreate = (props) => {
       })
       .then((response) => {
         console.log(response);
+        // forced the new state since we used a double useeffect in app
         props.setState([...props.data]);
         navigate('/');
       })
@@ -48,39 +49,45 @@ const PlacesCreate = (props) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor='placeName'>Name:</label>
-        <input type='text' name='name' value={name} onChange={handleName} />
-        <label htmlFor=''>Image:</label>
-        <input type='text' name='img' value={img} onChange={handleImg} />
+    <div className='placeCreateContainer'>
+      <div className='placeCreateContainerInfo'>
+        <h1>Create New Vacay</h1>
+        <form
+          onSubmit={handleSubmit}
+          style={{ display: 'flex', flexDirection: 'column', width: '200px' }}
+        >
+          <label htmlFor='placeName'>Name:</label>
+          <input type='text' name='name' value={name} onChange={handleName} />
+          <label htmlFor=''>Image:</label>
+          <input type='text' name='img' value={img} onChange={handleImg} />
 
-        <label htmlFor=''>Description:</label>
-        <input
-          type='text'
-          name='description'
-          value={description}
-          onChange={handleDescription}
-        />
-        <label htmlFor=''>Rating:</label>
-        <input
-          type='number'
-          value={rating}
-          onChange={handleRating}
-          name='rating'
-        />
-        <label htmlFor='continentName'>Continent:</label>
-        <input
-          type='text'
-          id='continentName'
-          name='continent'
-          value={continent}
-          onChange={handleContinent}
-        />
-        <button type='submit'>Create</button>
-      </form>
+          <label htmlFor=''>Description:</label>
+          <input
+            type='text'
+            name='description'
+            value={description}
+            onChange={handleDescription}
+          />
+          <label htmlFor=''>Rating:</label>
+          <input
+            type='number'
+            value={rating}
+            onChange={handleRating}
+            name='rating'
+          />
+          <label htmlFor='continentName'>Continent:</label>
+          <input
+            type='text'
+            id='continentName'
+            name='continent'
+            value={continent}
+            onChange={handleContinent}
+          />
+          <button type='submit'>Numinous</button>
+        </form>
 
-      {errorMessage && <p className='error-message'>{errorMessage}</p>}
+        {errorMessage && <p className='error-message'>{errorMessage}</p>}
+      </div>
     </div>
   );
 };

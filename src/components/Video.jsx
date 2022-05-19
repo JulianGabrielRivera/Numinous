@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { SearchIcon } from '@heroicons/react/solid';
 import videoBg from '../assets/video/beachvid.mp4';
 
 const Video = (props) => {
@@ -11,7 +11,15 @@ const Video = (props) => {
       </div>
       <div className='videoButtonContainer'>
         <div>
-          <input type='text' placeholder='Search here' />
+          <SearchIcon
+            className='h-5 w-5 text-blue-500'
+            style={{ height: '20px', marginRight: '10px' }}
+          />
+          <input
+            type='text'
+            placeholder='Search here'
+            style={{ height: '25px', borderRadius: '5px' }}
+          />
         </div>
         <div className='filterContainer'>
           <div className='buttonContainer'>

@@ -8,23 +8,24 @@ const Navbar = () => {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
   return (
     <>
-      <div style={{ position: 'absolute', zIndex: '1' }}>
+      <div style={{ position: 'absolute', zIndex: '1', top: 5, left: 10 }}>
         <DropdownButton id='dropdown-basic-button' variant='secondary' title=''>
-          <Dropdown.Item href='#/action-1'>
+          <div className='dropDown'>
+            <Link to='/'>
+              <button>Home</button>
+            </Link>
             {!isLoggedIn && (
               <Link to='/signup'>
                 <button>Sign UPPER!</button>
               </Link>
             )}
-          </Dropdown.Item>
-          <Dropdown.Item href='#/action-2'>
+
             {!isLoggedIn && (
               <Link to='/login'>
                 <button>Log in!</button>
               </Link>
             )}
-          </Dropdown.Item>
-          <Dropdown.Item href='#/action-3'>
+
             {isLoggedIn && (
               <>
                 <Link to='/'>
@@ -33,9 +34,12 @@ const Navbar = () => {
                 <Link to='/places-create'>
                   <button>Create a place</button>
                 </Link>
+                <Link to='/edit'>
+                  <button>Edit</button>
+                </Link>
               </>
             )}
-          </Dropdown.Item>
+          </div>
         </DropdownButton>
       </div>
     </>

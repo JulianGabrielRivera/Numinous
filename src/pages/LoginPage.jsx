@@ -40,27 +40,37 @@ const LoginPage = (props) => {
   };
 
   return (
-    <div className='LoginPage'>
-      <h1>Log In</h1>
+    <div className='loginContainer'>
+      <div className='loginContainerInfo'>
+        <h1>Log In</h1>
 
-      <form onSubmit={handleLoginSubmit}>
-        <label>Email:</label>
-        <input type='email' name='email' value={email} onChange={handleEmail} />
+        <form
+          onSubmit={handleLoginSubmit}
+          style={{ display: 'flex', flexDirection: 'column', width: '200px' }}
+        >
+          <label>Email:</label>
+          <input
+            type='email'
+            name='email'
+            value={email}
+            onChange={handleEmail}
+          />
 
-        <label>Password:</label>
-        <input
-          type='password'
-          name='password'
-          value={password}
-          onChange={handlePassword}
-        />
+          <label>Password:</label>
+          <input
+            type='password'
+            name='password'
+            value={password}
+            onChange={handlePassword}
+          />
 
-        <button type='submit'>Login</button>
-      </form>
-      {errorMessage && <p className='error-message'>{errorMessage}</p>}
+          <button type='submit'>Login</button>
+        </form>
+        {errorMessage && <p className='error-message'>{errorMessage}</p>}
 
-      <p>Don't have an account yet?</p>
-      <Link to={'/signup'}> Sign Up</Link>
+        <p>Don't have an account yet?</p>
+        <Link to={'/signup'}> Sign Up</Link>
+      </div>
     </div>
   );
 };

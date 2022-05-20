@@ -94,11 +94,12 @@ const Places = (props) => {
                 <h5
                   style={{
                     position: 'absolute',
-                    bottom: '90px',
-                    left: '40px',
+
+                    top: '50%',
+                    right: '50%',
+                    transform: 'translate(50%,-50%)',
                     color: 'white',
                     fontWeight: 'bold',
-                    padding: '20px',
                   }}
                 >
                   {place.name}

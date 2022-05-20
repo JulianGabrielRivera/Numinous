@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Sora', sans-serif;
 }
 body {
   background-color: #f1f2f6;
@@ -11,7 +12,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 600px;
+  height: 500px;
 }
 .videoButtonContainer {
   display: flex;
@@ -19,7 +20,7 @@ body {
   justify-content: center;
   align-items: center;
   text-align: left;
-  height: 200px;
+  height: 700px;
 
   /* height: 80px; */
 }
@@ -40,6 +41,8 @@ body {
   border: 1.5px dashed #343a40;
   border-radius: 10px;
   padding: 5px;
+  font-size: 0.9rem;
+  margin: 10px;
 }
 .filterContainer {
   justify-content: space-between;
@@ -62,6 +65,21 @@ body {
   width: 500px;
   border: 2.5px solid #343a40;
 }
+
+.editContainerInfo h1 {
+  font-family: 'Sora', sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.editContainerInfo label {
+  font-weight: bold;
+}
+.editContainerInfo button {
+  font-family: 'Sora', sans-serif;
+  background: none;
+  font-weight: bold;
+  color: #343a40;
+}
 .signUpContainer {
   display: flex;
   flex-direction: column;
@@ -76,7 +94,23 @@ body {
   align-items: center;
   height: 500px;
   width: 500px;
+
   border: 2.5px solid #343a40;
+  border-radius: 7px;
+}
+.signUpContainerInfo h1 {
+  font-family: 'Sora', sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.signUpContainerInfo label {
+  font-weight: bold;
+}
+.signUpContainerInfo button {
+  font-family: 'Sora', sans-serif;
+  background: none;
+  font-weight: bold;
+  color: #343a40;
 }
 
 .loginContainer {
@@ -97,6 +131,21 @@ body {
   border-radius: 7px;
 }
 
+.loginContainerInfo h1 {
+  font-family: 'Sora', sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.loginContainerInfo label {
+  font-weight: bold;
+}
+.loginContainerInfo button {
+  font-family: 'Sora', sans-serif;
+  background: none;
+  font-weight: bold;
+  color: #343a40;
+}
+
 .placeCreateContainer {
   display: flex;
   flex-direction: column;
@@ -112,6 +161,21 @@ body {
   height: 500px;
   width: 500px;
   border: 2.5px solid #343a40;
+  border-radius: 7px;
+}
+.placeCreateContainerInfo h1 {
+  font-family: 'Sora', sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.placeCreateContainerInfo label {
+  font-weight: bold;
+}
+.placeCreateContainerInfo button {
+  font-family: 'Sora', sans-serif;
+  background: none;
+  font-weight: bold;
+  color: #343a40;
 }
 
 .centered {
@@ -123,6 +187,8 @@ body {
 .centered h1 {
   color: #343a40;
   font-weight: bold;
+  font-family: 'Sora', sans-serif;
+  font-size: 2.2rem;
 }
 
 video {
@@ -138,11 +204,14 @@ nav button {
 .imageContainer {
   display: flex;
   flex-flow: wrap;
-  height: 600px;
+  height: auto;
   width: 100%;
 
   justify-content: center;
 }
+/* .placeImg:hover {
+  opacity: 0.5;
+} */
 
 .dropDown {
   display: flex;
@@ -155,7 +224,14 @@ nav button {
   font-weight: bold;
   margin-left: 10px;
 }
-
+.searchHere {
+  display: none;
+}
+@media (min-width: 750px) {
+  .buttonContainer {
+    flex-direction: row;
+  }
+}
 @media (min-width: 1200px) {
   .videoButtonContainer {
     display: flex;
@@ -171,7 +247,12 @@ nav button {
     /* height: 80px; */
   }
   .buttonContainer {
+    display: flex;
     flex-direction: row;
+    align-items: flex-start;
+  }
+  .searchHere {
+    display: block;
   }
 }
 

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
+import videoBg from '../assets/video/beachvid.mp4';
 const APIURL = process.env.REACT_APP_SERVER_URL;
 const EditProfile = () => {
   const [email, setEmail] = useState('');
@@ -67,7 +68,14 @@ const EditProfile = () => {
 
   return (
     <div className='editContainer'>
-      <div className='editContainerInfo'>
+      <video
+        src={videoBg}
+        autoPlay
+        loop
+        muted
+        style={{ height: '100vh', position: 'relative' }}
+      />
+      <div className='editContainerInfo' style={{ position: 'absolute' }}>
         <h1>Edit Profile</h1>
         <form
           onSubmit={handleSubmit}

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+import videoBg from '../assets/video/beachvid.mp4';
 const APIURL = process.env.REACT_APP_SERVER_URL;
 const SignupPage = () => {
   // storing the values for each here
@@ -47,7 +48,14 @@ const SignupPage = () => {
 
   return (
     <div className='signUpContainer'>
-      <div className='signUpContainerInfo'>
+      <video
+        src={videoBg}
+        autoPlay
+        loop
+        muted
+        style={{ height: '100vh', position: 'relative' }}
+      />
+      <div className='signUpContainerInfo' style={{ position: 'absolute' }}>
         <h1>Sign UPPER!</h1>
 
         <form
@@ -75,12 +83,26 @@ const SignupPage = () => {
 
           <label htmlFor='nameClick'>Name:</label>
           <input type='text' name='name' value={name} onChange={handleName} />
-          <button type='submit'>Sign UPPER!</button>
+          <button
+            type='submit'
+            style={{ marginTop: '20px', borderRadius: '10px' }}
+          >
+            Sign UPPER!
+          </button>
         </form>
 
         {errorMessage && <p className='error-message'>{errorMessage}</p>}
-        <p>Already have an account?</p>
-        <Link to={'/login'}>Login</Link>
+        <p style={{ marginTop: '10px' }}>Already have an account?</p>
+        <Link
+          to={'/login'}
+          style={{
+            textDecoration: 'none',
+            color: '#343a40',
+            fontWeight: 'bold',
+          }}
+        >
+          Login
+        </Link>
       </div>
     </div>
   );

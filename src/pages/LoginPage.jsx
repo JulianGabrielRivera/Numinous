@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/auth.context';
+import videoBg from '../assets/video/beachvid.mp4';
 
 const API_URL = process.env.REACT_APP_SERVER_URL;
 const LoginPage = (props) => {
@@ -42,7 +43,14 @@ const LoginPage = (props) => {
 
   return (
     <div className='loginContainer'>
-      <div className='loginContainerInfo'>
+      <video
+        src={videoBg}
+        autoPlay
+        loop
+        muted
+        style={{ height: '100vh', position: 'relative' }}
+      />
+      <div className='loginContainerInfo' style={{ position: 'absolute' }}>
         <h1>Log In</h1>
 
         <form
@@ -65,12 +73,26 @@ const LoginPage = (props) => {
             onChange={handlePassword}
           />
 
-          <button type='submit'>Login</button>
+          <button
+            type='submit'
+            style={{ marginTop: '20px', borderRadius: '10px' }}
+          >
+            Login
+          </button>
         </form>
         {errorMessage && <p className='error-message'>{errorMessage}</p>}
 
-        <p>Don't have an account yet?</p>
-        <Link to={'/signup'}> Sign Up</Link>
+        <p style={{ marginTop: '10px' }}>Don't have an account yet?</p>
+        <Link
+          to={'/signup'}
+          style={{
+            textDecoration: 'none',
+            color: '#343a40',
+            fontWeight: 'bold',
+          }}
+        >
+          Sign Up
+        </Link>
       </div>
     </div>
   );

@@ -1,30 +1,19 @@
-// const FilterPlaces = (props) => {
-//   const [firstLetter, setFirstLetter] = useState("All");
+// import React, { useState } from 'react';
 
-//   const handleSelect = (e) => {
-//     setFirstLetter(e.target.value);
+// const FilterFoods = (props) => {
+//   const [searchTerm, setSearchTerm] = useState('');
 
-//     // console.log("selected", e.target.value);
-//     props.filterMovies(e.target.value);
+//   const handleSearch = (e) => {
+//     setSearchTerm(e.target.value);
+//     props.handleSearch(e.target.value);
 //   };
+
 //   return (
+//     <div>
+//       <label htmlFor=''>Search Foods</label>
+//       <input type='text' value={searchTerm} onChange={handleSearch} />
+//     </div>
+//   );
+// };
 
-//     return (
-//       <div className="FilterMovies">
-//         <label>Show movies by first letter:</label>
-//         <select value={firstLetter} onChange={handleSelect}>
-//           <option value="All">All</option>
-//           <option value="A">A</option>
-//           <option value="B">B</option>
-//           <option value="C">C</option>
-//           <option value="D">D</option>
-//         </select>
-//       </div>
-//     );
-//   }
-
-// )
-
-// }
-
-// export default FilterPlaces
+// export default FilterFoods;

@@ -81,26 +81,31 @@ const PlacesDetails = (props) => {
       >
         <div
           style={{
-            height: '400px',
-            width: '100vw',
+            height: '500px',
+            width: '50vw',
             padding: '10px',
             backgroundImage: `url(${placeData.url})`,
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
+            marginTop: '20px',
           }}
         ></div>
         <h5>{placeData.name}</h5>
 
         <Rating data={placeData.rating} />
-        <p style={{ textAlign: 'left', padding: '20px' }}>
+        <p style={{ textAlign: 'left', padding: '20px', width: '800px' }}>
           {placeData.description}
         </p>
         <div
           style={{
-            height: '200px',
-            width: '500px',
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100px',
+            width: '300px',
             overflowY: 'scroll',
             textAlign: 'center',
+            alignItems: 'center',
+            border: '1px solid black',
           }}
         >
           {placeData.comments.map((comment) => {
@@ -116,7 +121,11 @@ const PlacesDetails = (props) => {
         </div>
         <form
           onSubmit={handleSubmit}
-          style={{ display: 'flex', flexDirection: 'column' }}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            marginTop: '40px',
+          }}
         >
           <textarea
             name='content'

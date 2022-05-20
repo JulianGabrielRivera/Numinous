@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
+import videoBg from '../assets/video/beachvid.mp4';
 
 const PlacesCreate = (props) => {
   const [name, setName] = useState('');
@@ -52,7 +53,17 @@ const PlacesCreate = (props) => {
 
   return (
     <div className='placeCreateContainer'>
-      <div className='placeCreateContainerInfo'>
+      <video
+        src={videoBg}
+        autoPlay
+        loop
+        muted
+        style={{ height: '100vh', position: 'relative' }}
+      />
+      <div
+        className='placeCreateContainerInfo'
+        style={{ position: 'absolute' }}
+      >
         <h1>Create New Vacay</h1>
         <form
           onSubmit={handleSubmit}

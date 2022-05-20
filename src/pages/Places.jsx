@@ -95,7 +95,7 @@ const Places = (props) => {
                   style={{
                     position: 'absolute',
                     bottom: '90px',
-                    left: '60px',
+                    left: '40px',
                     color: 'white',
                     fontWeight: 'bold',
                     padding: '20px',

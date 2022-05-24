@@ -255,6 +255,10 @@ nav button {
     display: block;
   }
 }
+.dark {
+  background: #201c2b;
+  color: white;
+}
 
 /* .videoContainer {
 

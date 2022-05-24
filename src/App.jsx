@@ -29,6 +29,8 @@ function App() {
 
   const [likes, setLikes] = useState(0);
 
+  const [theme, setTheme] = useState('light');
+
   // const [filteredPlacesArray, setFilteredPlacesArray] =
   //   useState(placesDataClone);
 
@@ -81,9 +83,22 @@ function App() {
     // every time it changes it rerenders everytime placesdataclone changes it runs the useeffect and when use effect runs we update state with array of places when we delete it
   }, [filterDataClone]);
   return (
-    <div className='App'>
+    <div className={'App ' + theme} style={{ position: 'relative' }}>
       <Navbar />
+      <select
+        onChange={(event) => setTheme(event.target.value)}
+        style={{
+          position: 'absolute',
+          left: '10px',
+          zIndex: '1',
+          top: '150px',
+        }}
+      >
+        <option value='light'> Light </option>
+        <option value='dark'> Dark </option>
+      </select>
       {/* <FilterPlaces handleSearch={filterPlacesByString} /> */}
+
       <Routes>
         <Route
           path='/'

@@ -83,7 +83,7 @@ function App() {
     // every time it changes it rerenders everytime placesdataclone changes it runs the useeffect and when use effect runs we update state with array of places when we delete it
   }, [filterDataClone]);
   return (
-    <div className={'App ' + theme} style={{ position: 'relative' }}>
+    <div className={'App ' + theme}>
       <Navbar />
       <select
         onChange={(event) => setTheme(event.target.value)}

@@ -33,7 +33,7 @@ const Places = (props) => {
     <div className='imageContainer'>
       {data.map((place) => {
         return (
-          <div key={place._id} onClick={goToSignUp}>
+          <div key={place._id}>
             <Link
               to={`/placedetails/${place._id}`}
               style={{ textDecoration: 'none' }}

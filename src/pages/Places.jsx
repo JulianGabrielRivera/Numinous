@@ -15,7 +15,11 @@ const Places = (props) => {
   const { storedToken } = useContext(AuthContext);
   // const [like, setLike] = useState(0);
   const { placeId } = useParams();
+  const navigate = useNavigate();
 
+  const goToSignUp = () => {
+    navigate('/signup');
+  };
   // const handleClick = () => {
   //   axios
   //     .post(`${APIURL}/api/like/${placeId}`)
@@ -29,7 +33,7 @@ const Places = (props) => {
     <div className='imageContainer'>
       {data.map((place) => {
         return (
-          <div key={place._id}>
+          <div key={place._id} onClick={goToSignUp}>
             <Link
               to={`/placedetails/${place._id}`}
               style={{ textDecoration: 'none' }}

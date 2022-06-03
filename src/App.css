@@ -34,7 +34,7 @@ body {
 
 .buttonContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
 }
 .buttonContainer button {
@@ -89,9 +89,9 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: url('./assets/images/beach4.jpg');
+  /* background: url('./assets/images/beach4.jpg');
   background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
 }
 .signUpContainerInfo {
   display: flex;
@@ -241,9 +241,19 @@ nav button {
     flex-direction: row;
   }
 } */
-@media (min-width: 750px) {
+@media (max-width: 750px) {
   .buttonContainer {
-    flex-direction: row;
+    flex-direction: column;
+  }
+  .signUpContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('./assets/images/beach4.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
   }
 }
 @media (min-width: 1200px) {

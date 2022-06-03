@@ -89,6 +89,9 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background: url('./assets/images/beach4.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .signUpContainerInfo {
   display: flex;
@@ -97,9 +100,9 @@ body {
   align-items: center;
   height: 500px;
   width: 500px;
-
+  /* 
   border: 2.5px solid #343a40;
-  border-radius: 7px;
+  border-radius: 7px; */
 }
 .signUpContainerInfo h1 {
   font-family: 'Sora', sans-serif;

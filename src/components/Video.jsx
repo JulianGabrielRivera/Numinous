@@ -46,13 +46,21 @@ const Video = (props) => {
   };
 
   return (
-    <div className='videoContainer'>
-      <video src={videoBg} autoPlay loop muted style={{ height: '400px' }} />
+    <>
+      <div className='videoContainer'>
+        <video
+          src={videoBg}
+          autoPlay
+          loop
+          muted
+          style={{ height: '400px' }}
+          id='videoBackground'
+        />
 
-      <div className='centered'>
-        <h1>Numinous</h1>
+        <div className='centered'>
+          <h1>Numinous</h1>
+        </div>
       </div>
-
       <div className='videoButtonContainer'>
         <div className='searchHere'>
           <button
@@ -104,31 +112,31 @@ const Video = (props) => {
             })}
 
             {/*            
-         
-            <button
-              onClick={() => {
-                handleContinent('South America');
-              }}
-            >
-              North America
-            </button>
-
-            <button
-              onClick={() => {
-                handleContinent('Europe');
-              }}
-            >
-              Europe
-            </button>
-            <button>Asia</button>
-            <button>South America</button>
-            <button>Australia</button>
-            <button>Africa</button>
-            <button>Antartica</button> */}
+           
+              <button
+                onClick={() => {
+                  handleContinent('South America');
+                }}
+              >
+                North America
+              </button>
+  
+              <button
+                onClick={() => {
+                  handleContinent('Europe');
+                }}
+              >
+                Europe
+              </button>
+              <button>Asia</button>
+              <button>South America</button>
+              <button>Australia</button>
+              <button>Africa</button>
+              <button>Antartica</button> */}
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

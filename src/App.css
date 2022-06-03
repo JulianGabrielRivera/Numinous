@@ -12,7 +12,10 @@ body {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 500px;
+  height: 400px;
+  background: url('./assets/images/beach4.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .videoButtonContainer {
   display: flex;
@@ -20,7 +23,7 @@ body {
   justify-content: center;
   align-items: center;
   text-align: left;
-  height: 700px;
+  /* height: 400px; */
 
   /* height: 80px; */
 }
@@ -204,8 +207,9 @@ nav button {
 .imageContainer {
   display: flex;
   flex-flow: wrap;
-  height: auto;
+  height: 100vh;
   width: 100%;
+  margin-top: 20px;
 
   justify-content: center;
 }
@@ -227,6 +231,13 @@ nav button {
 .searchHere {
   display: none;
 }
+/* #videoBackground {
+  position: fixed;
+  z-index: -1;.videoButtonContainer {
+    display: flex;
+    flex-direction: row;
+  }
+} */
 @media (min-width: 750px) {
   .buttonContainer {
     flex-direction: row;
@@ -258,6 +269,16 @@ nav button {
 .dark {
   background: #201c2b;
   color: white;
+}
+
+@media (max-width: 800px) {
+  video {
+    display: none;
+  }
+  /* video {
+    display: none;
+    background: url('./assets/images/beach4.jpg');
+  } */
 }
 
 /* .videoContainer {

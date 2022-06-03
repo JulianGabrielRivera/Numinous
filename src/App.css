@@ -255,6 +255,9 @@ nav button {
     background-size: cover;
     background-repeat: no-repeat;
   }
+  video {
+    display: none;
+  }
 }
 @media (min-width: 1200px) {
   .videoButtonContainer {

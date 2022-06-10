@@ -4,6 +4,7 @@ import axios from 'axios';
 import { AuthContext } from '../context/auth.context';
 import videoBg from '../assets/video/beachvid.mp4';
 import { useInterval } from 'usehooks-ts';
+import jwt_decode from 'jwt-decode';
 
 const API_URL = process.env.REACT_APP_SERVER_URL;
 const LoginPage = (props) => {
@@ -11,12 +12,17 @@ const LoginPage = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const [user, setUser] = useState({});
 
   // used to navigate to next page it is a custom hook
   const navigate = useNavigate();
   const google = window.google;
   function handleCallbackResponse(response) {
     console.log('Encoded JWT ID token' + response.credential);
+    let userObject = jwt_decode(response.credential);
+    console.log(userObject);
+    setUser(userObject);
+    document.getElementById('signInDiv').hidden = true;
   }
   useEffect(() => {
     // global google the script we put in public html folder gives us the javascripts objects we can use in our react js
@@ -31,6 +37,7 @@ const LoginPage = (props) => {
       size: 'large',
     });
   }, []);
+  //  if we have no user : show sign in button: if we have user show log out button.
 
   const { storeToken, authenticateUser } = useContext(AuthContext);
 
@@ -57,6 +64,10 @@ const LoginPage = (props) => {
         const errorDescription = error.response.data.message;
         setErrorMessage(errorDescription);
       });
+  };
+  const handleSignOut = (e) => {
+    setUser({});
+    document.getElementById('signInDiv').hidden = false;
   };
 
   return (
@@ -98,6 +109,16 @@ const LoginPage = (props) => {
             Login
           </button>
           <div id='signInDiv' style={{ zIndex: '1' }}></div>
+
+          {Object.keys(user).length != 0 && (
+            <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
+          )}
+          {user && (
+            <div>
+              <img src={user.picture} />
+              <h3>{user.name}</h3>
+            </div>
+          )}
         </form>
         {errorMessage && <p className='error-message'>{errorMessage}</p>}
 

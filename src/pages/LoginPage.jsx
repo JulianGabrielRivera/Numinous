@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/auth.context';
@@ -13,6 +13,22 @@ const LoginPage = (props) => {
 
   // used to navigate to next page it is a custom hook
   const navigate = useNavigate();
+
+  function handleCallbackResponse(response) {
+    console.log('Encoded JWT ID token' + response.credential);
+  }
+  useEffect(() => {
+    // global google the script we put in public html folder gives us the javascripts objects we can use in our react js
+    google.accounts.id.initialize({
+      client_id:
+        '478476523522-7ohmi0thf3t15l3fv8t9encbkg9p7d3j.apps.googleusercontent.com',
+      callback: handleCallbackResponse,
+    });
+    google.accounts.id.renderButton(document.getElementById('signInDiv'), {
+      theme: 'outline',
+      size: 'large',
+    });
+  }, []);
 
   const { storeToken, authenticateUser } = useContext(AuthContext);
 
@@ -79,6 +95,7 @@ const LoginPage = (props) => {
           >
             Login
           </button>
+          <div id='signInDiv'></div>
         </form>
         {errorMessage && <p className='error-message'>{errorMessage}</p>}
 

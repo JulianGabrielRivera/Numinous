@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/auth.context';
 import videoBg from '../assets/video/beachvid.mp4';
+import { useInterval } from 'usehooks-ts';
 
 const API_URL = process.env.REACT_APP_SERVER_URL;
 const LoginPage = (props) => {
@@ -13,12 +14,13 @@ const LoginPage = (props) => {
 
   // used to navigate to next page it is a custom hook
   const navigate = useNavigate();
-
+  const google = window.google;
   function handleCallbackResponse(response) {
     console.log('Encoded JWT ID token' + response.credential);
   }
   useEffect(() => {
     // global google the script we put in public html folder gives us the javascripts objects we can use in our react js
+
     google.accounts.id.initialize({
       client_id:
         '478476523522-7ohmi0thf3t15l3fv8t9encbkg9p7d3j.apps.googleusercontent.com',
@@ -95,7 +97,7 @@ const LoginPage = (props) => {
           >
             Login
           </button>
-          <div id='signInDiv'></div>
+          <div id='signInDiv' style={{ zIndex: '1' }}></div>
         </form>
         {errorMessage && <p className='error-message'>{errorMessage}</p>}
 

@@ -20,7 +20,7 @@ const LoginPage = (props) => {
   function handleCallbackResponse(response) {
     // let userObject = jwt_decode(response.credential);
     // let googleToken = response.credential;
-    // // console.log(googleToken);
+    // // console.log(googleToken);.
     // // console.log(userObject);
     // setUser(userObject);
     // // console.log(response);

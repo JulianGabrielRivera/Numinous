@@ -53,6 +53,15 @@ function App() {
   //   setplacesDataFilter(updatedNames);
   // };
 
+  const addPlace = (place) => {
+    const newPlace = [...placesData, place];
+    setPlacesData(newPlace);
+  };
+
+  // deleteplaces??
+
+  // filterplaces?
+
   useEffect(() => {
     axios
       .get(`${API_URL}/api/places`)
@@ -69,13 +78,13 @@ function App() {
   }, []);
 
   //  shouldnt have 2 effect hooks pass the original state, add new place .. original state, newplace
-  useEffect(() => {
-    axios.get(`${API_URL}/api/places`).then((response) => {
-      setPlacesData([...response.data.message]);
-      console.log(response.data.message);
-    });
-    // every time it changes it rerenders everytime placesdataclone changes it runs the useeffect and when use effect runs we update state with array of places when we delete it
-  }, [placesDataClone, likes]);
+  // useEffect(() => {
+  //   axios.get(`${API_URL}/api/places`).then((response) => {
+  //     setPlacesData([...response.data.message]);
+  //     console.log(response.data.message);
+  //   });
+  //   // every time it changes it rerenders everytime placesdataclone changes it runs the useeffect and when use effect runs we update state with array of places when we delete it
+  // }, [placesDataClone, likes]);
 
   useEffect(() => {
     setPlacesData([...placesData]);
@@ -145,7 +154,11 @@ function App() {
           element={
             <IsPrivate>
               <IsAdmin>
-                <PlacesCreate data={placesData} setState={setPlacesDataClone} />
+                <PlacesCreate
+                  data={placesData}
+                  setState={setPlacesDataClone}
+                  addPlace={addPlace}
+                />
               </IsAdmin>
             </IsPrivate>
           }

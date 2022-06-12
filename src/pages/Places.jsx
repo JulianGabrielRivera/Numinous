@@ -31,6 +31,7 @@ const Places = (props) => {
 
   return (
     <div className='imageContainer'>
+      <h1>yea</h1>
       {data.map((place) => {
         return (
           <div key={place._id}>

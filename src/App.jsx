@@ -58,6 +58,9 @@ function App() {
     setPlacesData(newPlace);
   };
 
+  const deletePlace = (id) => {
+    setPlacesData(placesData.filter((place) => place._id !== id));
+  };
   // deleteplaces??
 
   // filterplaces?
@@ -112,13 +115,10 @@ function App() {
         <Route
           path='/'
           element={
-            <HomePage
+            <Places
               data={placesData}
-              dataClone={placesDataClone}
-              setState={setPlacesDataClone}
-              filterState={setFilterDataClone}
-              originalPlaces={setPlacesData}
               setLikes={setLikes}
+              deletePlace={deletePlace}
               // nameSort={sortByName}
             />
           }

@@ -12,7 +12,7 @@ import { AuthContext } from '../context/auth.context';
 import Rating from '../components/Rating';
 const APIURL = process.env.REACT_APP_SERVER_URL;
 const Places = (props) => {
-  const { data, setState, setLikes } = props;
+  const { data, setState, setLikes, deletePlace } = props;
   const { storedToken } = useContext(AuthContext);
   // const [like, setLike] = useState(0);
   const { placeId } = useParams();
@@ -32,7 +32,7 @@ const Places = (props) => {
 
   return (
     <div className='imageContainer'>
-      <Place data={data} setState={setState} setLikes={setLikes} />
+      <Place data={data} setLikes={setLikes} deletePlace={deletePlace} />
     </div>
   );
 };

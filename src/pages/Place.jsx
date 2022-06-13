@@ -9,7 +9,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 
 const Place = (props) => {
-  const { data, setState, setLikes } = props;
+  const { data, setState, setLikes, deletePlace } = props;
   const { placeId } = useParams();
   const { storedToken } = useContext(AuthContext);
   const APIURL = process.env.REACT_APP_SERVER_URL;
@@ -121,7 +121,8 @@ const Place = (props) => {
                             },
                           })
                           .then((response) => {
-                            console.log(response);
+                            console.log(response.data.message);
+                            deletePlace(response.data.message._id);
 
                             // axios
                             // .post('http://localhost:5005/api/places/create', requestBody, {
@@ -138,7 +139,8 @@ const Place = (props) => {
                             //     // setPlacesDataClone([...response.data.message]);
                             //   })
                             //   .catch((err) => console.log(err));
-                            setState([...response.data.message]);
+
+                            // setState([...response.data.message]);
                           })
 
                           .catch((err) => {

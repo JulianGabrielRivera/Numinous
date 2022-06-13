@@ -19,7 +19,7 @@ const HomePage = (props) => {
         filterState={filterState}
         originalPlaces={originalPlaces}
       />
-      <Places data={data} setState={setState} setLikes={setLikes} />
+      {/* <Places data={data} setState={setState} setLikes={setLikes} /> */}
     </>
   );
 };

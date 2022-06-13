@@ -37,10 +37,10 @@ const PlacesCreate = (props) => {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        console.log(response);
-        console.log(requestBody);
+        console.log(response.data.message);
+
         // forced the new state since we used a double useeffect in app
-        addPlace(requestBody);
+        addPlace(response.data.message);
 
         // props.setState([...props.data]);
         navigate('/');

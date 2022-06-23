@@ -1,57 +1,33 @@
 import './App.css';
 import './App.jsx';
-import placesToGoJSON from './places-data.json';
-import SignupPage from './pages/SignupPage';
+
 import { Routes, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
 import Navbar from './components/Navbar';
-import LoginPage from './pages/LoginPage';
-import HomePage from './pages/HomePage';
-// import SimpleMap from './pages/SimpleMap';
 import IsAnon from './components/IsAnon';
 import IsPrivate from './components/IsPrivate';
+import IsAdmin from './components/IsAdmin';
+import LoginPage from './pages/LoginPage';
 import Places from './pages/Places';
 import PlacesDetails from './pages/PlacesDetails';
-import { useEffect, useState } from 'react';
+import SignupPage from './pages/SignupPage';
 import PlacesCreate from './pages/PlacesCreate';
-import IsAdmin from './components/IsAdmin';
-import Video from './components/Video';
-import axios from 'axios';
 import EditProfile from './pages/EditProfile';
-import FilterPlaces from './components/FilterPlaces';
+
+import axios from 'axios';
+
 const API_URL = process.env.REACT_APP_SERVER_URL;
 
 function App() {
   const [placesData, setPlacesData] = useState([]);
 
-  const [placesDataClone, setPlacesDataClone] = useState([]);
-
   const [filterDataClone, setFilterDataClone] = useState([]);
+  const [firstLetter, setFirstLetter] = useState('');
 
   const [likes, setLikes] = useState(0);
 
   const [theme, setTheme] = useState('light');
-
-  // const [filteredPlacesArray, setFilteredPlacesArray] =
-  //   useState(placesDataClone);
-
-  // const filterPlacesByString = (stringToSearch) => {
-  //   const filteredPlaces = placesData.filter((placeElement) => {
-  //     return placeElement.name
-  //       .toLowerCase()
-  //       .includes(stringToSearch.toLowerCase());
-  //   });
-  //   setFilteredPlacesArray(filteredPlaces);
-  // };
-
-  // const [placesDataFilter, setplacesDataFilter] = useState([]);
-
-  // const sortByName = () => {
-  //   const updatedNames = [
-  //     ...placesDataFilter.sort((a, b) => a.name.localeCompare(b.name)),
-  //   ];
-
-  //   setplacesDataFilter(updatedNames);
-  // };
 
   const addPlace = (place) => {
     const newPlace = [...placesData, place];
@@ -61,9 +37,28 @@ function App() {
   const deletePlace = (id) => {
     setPlacesData(placesData.filter((place) => place._id !== id));
   };
-  // deleteplaces??
 
-  // filterplaces?
+  const filteredPlaces = (continent) => {
+    const filt = filterDataClone.filter(
+      (eachPlace) => eachPlace.continent === continent
+    );
+    setPlacesData(filt);
+  };
+  const handleSearch = (e) => {
+    // const firstLetter = setFirstLetter(e.target.value);
+    setPlacesData(
+      placesData.filter((place) => place.name[0] !== e.target.value)
+    );
+  };
+
+  const showAll = () => {
+    axios
+      .get(`${API_URL}/api/places`)
+      .then((response) => {
+        setPlacesData([...response.data.message]);
+      })
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
     axios
@@ -72,28 +67,13 @@ function App() {
         console.log(response.data.message);
 
         setPlacesData([...response.data.message]);
-
-        // setPlacesDataClone([...response.data.message]);
+        setFilterDataClone([...response.data.message]);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  //  shouldnt have 2 effect hooks pass the original state, add new place .. original state, newplace
-  // useEffect(() => {
-  //   axios.get(`${API_URL}/api/places`).then((response) => {
-  //     setPlacesData([...response.data.message]);
-  //     console.log(response.data.message);
-  //   });
-  //   // every time it changes it rerenders everytime placesdataclone changes it runs the useeffect and when use effect runs we update state with array of places when we delete it
-  // }, [placesDataClone, likes]);
-
-  useEffect(() => {
-    setPlacesData([...placesData]);
-
-    // every time it changes it rerenders everytime placesdataclone changes it runs the useeffect and when use effect runs we update state with array of places when we delete it
-  }, [filterDataClone]);
   return (
     <div className={'App ' + theme}>
       <Navbar />
@@ -109,7 +89,6 @@ function App() {
         <option value='light'> Light </option>
         <option value='dark'> Dark </option>
       </select>
-      {/* <FilterPlaces handleSearch={filterPlacesByString} /> */}
 
       <Routes>
         <Route
@@ -119,6 +98,9 @@ function App() {
               data={placesData}
               setLikes={setLikes}
               deletePlace={deletePlace}
+              filteredPlaces={filteredPlaces}
+              handleSearch={handleSearch}
+              showAll={showAll}
               // nameSort={sortByName}
             />
           }
@@ -154,11 +136,7 @@ function App() {
           element={
             <IsPrivate>
               <IsAdmin>
-                <PlacesCreate
-                  data={placesData}
-                  setState={setPlacesDataClone}
-                  addPlace={addPlace}
-                />
+                <PlacesCreate data={placesData} addPlace={addPlace} />
               </IsAdmin>
             </IsPrivate>
           }

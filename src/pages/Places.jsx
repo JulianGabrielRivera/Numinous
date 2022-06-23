@@ -1,39 +1,28 @@
-import blackHeart from '../assets/images/heart2.png';
-import redHeart from '../assets/images/heart1.png';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { XIcon } from '@heroicons/react/solid';
-import { ThumbDownIcon } from '@heroicons/react/solid';
-import { useState, useEffect, useContext } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import Video from '../components/Video';
+
 import Place from './Place';
 
-import { AuthContext } from '../context/auth.context';
-import Rating from '../components/Rating';
-const APIURL = process.env.REACT_APP_SERVER_URL;
-const Places = (props) => {
-  const { data, setState, setLikes, deletePlace } = props;
-  const { storedToken } = useContext(AuthContext);
-  // const [like, setLike] = useState(0);
-  const { placeId } = useParams();
-  const navigate = useNavigate();
+import FilterPlaces from '../components/FilterPlaces';
 
-  const goToSignUp = () => {
-    navigate('/signup');
-  };
-  // const handleClick = () => {
-  //   axios
-  //     .post(`${APIURL}/api/like/${placeId}`)
-  //     .then((response) => {
-  //       console.log(response.data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
+const Places = (props) => {
+  const { data, setLikes, deletePlace, filteredPlaces, showAll, handleSearch } =
+    props;
 
   return (
-    <div className='imageContainer'>
-      <Place data={data} setLikes={setLikes} deletePlace={deletePlace} />
-    </div>
+    <>
+      <div>
+        <Video />
+        <FilterPlaces
+          filteredPlaces={filteredPlaces}
+          showAll={showAll}
+          handleSearch={handleSearch}
+        />
+      </div>
+
+      <div className='imageContainer'>
+        <Place data={data} setLikes={setLikes} deletePlace={deletePlace} />
+      </div>
+    </>
   );
 };
 

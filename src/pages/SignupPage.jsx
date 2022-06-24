@@ -2,6 +2,8 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import videoBg from '../assets/video/beachvid.mp4';
+import { Button } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 const APIURL = process.env.REACT_APP_SERVER_URL;
 const SignupPage = () => {
   // storing the values for each here
@@ -58,38 +60,52 @@ const SignupPage = () => {
       <div className='signUpContainerInfo' style={{ position: 'absolute' }}>
         <h1>Sign UPPER!</h1>
 
-        <form
-          onSubmit={handleSubmit}
-          style={{ display: 'flex', flexDirection: 'column', width: '200px' }}
+        <div
+          style={{ display: 'flex', justifyContent: 'center', width: '100vw' }}
         >
-          <label htmlFor='emailClick'>Email:</label>
-          {/* ask about value and email */}
-          {/* access by name and gets value */}
-          <input
-            type='text'
-            name='email'
-            value={email}
-            onChange={handleEmail}
-          />
+          <Form style={{ width: '400px' }} onSubmit={handleSubmit}>
+            <Form.Group className='mb-3' controlId='formBasicEmail'>
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type='email'
+                placeholder='Enter email'
+                value={email}
+                onChange={handleEmail}
+              />
+            </Form.Group>
 
-          <label htmlFor='passwordClick'>Password:</label>
-          {/* ask about value and name */}
-          <input
-            type='password'
-            name='password'
-            value={password}
-            onChange={handlePassword}
-          />
-
-          <label htmlFor='nameClick'>Name:</label>
-          <input type='text' name='name' value={name} onChange={handleName} />
-          <button
-            type='submit'
-            style={{ marginTop: '20px', borderRadius: '10px' }}
-          >
-            Sign UPPER!
-          </button>
-        </form>
+            <Form.Group className='mb-3' controlId='formBasicPassword'>
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type='password'
+                placeholder='Password'
+                onChange={handlePassword}
+                // style={{ width: '400px' }}
+              />
+            </Form.Group>
+            <Form.Group className='mb-3' controlId='formBasicEmail'>
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type='text'
+                placeholder='Enter your name'
+                value={name}
+                onChange={handleName}
+              />
+            </Form.Group>
+            <Link to={'/password'} style={{ color: 'lightgray' }}>
+              Forgot password?
+            </Link>
+            <div>
+              <Button
+                variant='primary'
+                type='submit'
+                style={{ marginTop: '20px', borderRadius: '10px' }}
+              >
+                Submit
+              </Button>
+            </div>
+          </Form>
+        </div>
 
         {errorMessage && <p className='error-message'>{errorMessage}</p>}
         <p style={{ marginTop: '10px' }}>Already have an account?</p>

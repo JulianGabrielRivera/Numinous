@@ -73,6 +73,7 @@ const PlacesDetails = (props) => {
   return (
     placeData && (
       <div
+        key={placeData._id}
         style={{
           display: 'flex',
           flexDirection: 'column',

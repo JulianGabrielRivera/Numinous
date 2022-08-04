@@ -5,7 +5,7 @@ import videoBg from '../assets/video/beachvid.mp4';
 import { Button } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
 const APIURL = process.env.REACT_APP_SERVER_URL;
-const SignupPage = () => {
+const SignupPage = (props) => {
   // storing the values for each here
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -84,7 +84,7 @@ const SignupPage = () => {
               />
             </Form.Group>
             <Form.Group className='mb-3' controlId='formBasicEmail'>
-              <Form.Label>Email</Form.Label>
+              <Form.Label>Name</Form.Label>
               <Form.Control
                 type='text'
                 placeholder='Enter your name'

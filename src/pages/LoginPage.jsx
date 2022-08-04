@@ -3,8 +3,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/auth.context';
 import videoBg from '../assets/video/beachvid.mp4';
-import { useInterval } from 'usehooks-ts';
-import jwt_decode from 'jwt-decode';
 
 const API_URL = process.env.REACT_APP_SERVER_URL;
 const LoginPage = (props) => {

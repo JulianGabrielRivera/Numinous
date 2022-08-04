@@ -13,6 +13,7 @@ const Video = (props) => {
           muted
           style={{ height: '400px' }}
           id='videoBackground'
+          className='video'
         />
       </div>
     </>

@@ -6,34 +6,16 @@ import { XIcon } from '@heroicons/react/solid';
 import { ThumbDownIcon } from '@heroicons/react/solid';
 import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import SearchPlaces from '../components/SearchBar';
-
 import { AuthContext } from '../context/auth.context';
-import Rating from '../components/Rating';
-const APIURL = process.env.REACT_APP_SERVER_URL;
-const Places = (props) => {
-  const { data, setState, setLikes, filterDataClone } = props;
-  console.log(filterDataClone);
-  const { storedToken } = useContext(AuthContext);
-  // const [like, setLike] = useState(0);
+
+const Place = (props) => {
+  const { data, setState, setLikes, deletePlace } = props;
   const { placeId } = useParams();
-  const navigate = useNavigate();
-
-  const goToSignUp = () => {
-    navigate('/signup');
-  };
-  // const handleClick = () => {
-  //   axios
-  //     .post(`${APIURL}/api/like/${placeId}`)
-  //     .then((response) => {
-  //       console.log(response.data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
+  const { storedToken } = useContext(AuthContext);
+  const APIURL = process.env.REACT_APP_SERVER_URL;
   return (
-    <div className='imageContainer'>
-      {filterDataClone.map((place) => {
+    <>
+      {data.map((place) => {
         return (
           <div key={place._id}>
             <Link
@@ -139,7 +121,8 @@ const Places = (props) => {
                             },
                           })
                           .then((response) => {
-                            console.log(response);
+                            console.log(response.data.message);
+                            deletePlace(response.data.message._id);
 
                             // axios
                             // .post('http://localhost:5005/api/places/create', requestBody, {
@@ -156,7 +139,8 @@ const Places = (props) => {
                             //     // setPlacesDataClone([...response.data.message]);
                             //   })
                             //   .catch((err) => console.log(err));
-                            setState([...response.data.message]);
+
+                            // setState([...response.data.message]);
                           })
 
                           .catch((err) => {
@@ -183,8 +167,8 @@ const Places = (props) => {
           </div>
         );
       })}
-    </div>
+    </>
   );
 };
 
-export default Places;
+export default Place;

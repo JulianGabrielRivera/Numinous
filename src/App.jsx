@@ -18,6 +18,7 @@ import Video from './components/Video';
 import axios from 'axios';
 import EditProfile from './pages/EditProfile';
 import FilterPlaces from './components/FilterPlaces';
+import SearchBar from './components/SearchBar';
 const API_URL = process.env.REACT_APP_SERVER_URL;
 
 function App() {
@@ -31,6 +32,14 @@ function App() {
 
   const [theme, setTheme] = useState('light');
 
+  const filterPlacesByString = (stringToSearch) => {
+    const filteredPlaces = placesData.filter((placeElement) => {
+      return placeElement.name
+        .toLowerCase()
+        .includes(stringToSearch.toLowerCase());
+    });
+    setFilterDataClone(filteredPlaces);
+  };
   // const [filteredPlacesArray, setFilteredPlacesArray] =
   //   useState(placesDataClone);
 
@@ -60,6 +69,7 @@ function App() {
         console.log(response.data.message);
 
         setPlacesData([...response.data.message]);
+        setFilterDataClone([...response.data.message]);
 
         // setPlacesDataClone([...response.data.message]);
       })
@@ -67,11 +77,13 @@ function App() {
         console.log(err);
       });
   }, []);
+  console.log(filterDataClone);
 
   //  shouldnt have 2 effect hooks pass the original state, add new place .. original state, newplace
   useEffect(() => {
     axios.get(`${API_URL}/api/places`).then((response) => {
       setPlacesData([...response.data.message]);
+
       console.log(response.data.message);
     });
     // every time it changes it rerenders everytime placesdataclone changes it runs the useeffect and when use effect runs we update state with array of places when we delete it
@@ -110,10 +122,13 @@ function App() {
               filterState={setFilterDataClone}
               originalPlaces={setPlacesData}
               setLikes={setLikes}
+              filterDataClone={filterDataClone}
+              filterPlacesByString={filterPlacesByString}
               // nameSort={sortByName}
             />
           }
         />
+
         <Route
           path='/signup'
           element={

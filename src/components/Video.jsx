@@ -2,10 +2,18 @@ import React, { useEffect } from 'react';
 import { SearchIcon } from '@heroicons/react/solid';
 import videoBg from '../assets/video/beachvid.mp4';
 import axios from 'axios';
+import SearchBar from './SearchBar';
 
 const API_URL = process.env.REACT_APP_SERVER_URL;
 const Video = (props) => {
-  const { setState, dataClone, filterState, originalPlaces } = props;
+  const {
+    setState,
+    dataClone,
+    filterState,
+    originalPlaces,
+    filterDataClone,
+    filterPlacesByString,
+  } = props;
 
   const continents = [
     'South America',
@@ -62,31 +70,10 @@ const Video = (props) => {
         </div>
       </div>
       <div className='videoButtonContainer'>
-        <div className='searchHere'>
-          <button
-            style={{
-              color: '#343a40',
-              fontWeight: 'bold',
-              fontSize: '1.2rem',
-              borderRadius: '10px',
-              border: '1.5px dashed #343a40',
-              width: '100px',
-              textAlign: 'center',
-              marginRight: '10px',
-            }}
-          >
-            Filter
-          </button>
-          <SearchIcon
-            className='h-5 w-5 text-blue-500'
-            style={{ height: '20px', marginRight: '10px' }}
-          />
-          <input
-            type='text'
-            placeholder='Search for places'
-            style={{ height: '25px', borderRadius: '5px' }}
-          />
-        </div>
+        <SearchBar
+          filterDataClone={filterDataClone}
+          filterPlacesByString={filterPlacesByString}
+        />
         <div className='filterContainer'>
           <div className='buttonContainer'>
             <button

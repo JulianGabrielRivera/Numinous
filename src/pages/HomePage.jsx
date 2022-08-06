@@ -9,6 +9,8 @@ const HomePage = (props) => {
     filterState,
     originalPlaces,
     setLikes,
+    filterDataClone,
+    filterPlacesByString,
   } = props;
   return (
     <>
@@ -18,8 +20,15 @@ const HomePage = (props) => {
         dataClone={dataClone}
         filterState={filterState}
         originalPlaces={originalPlaces}
+        filterDataClone={filterDataClone}
+        filterPlacesByString={filterPlacesByString}
       />
-      <Places data={data} setState={setState} setLikes={setLikes} />
+      <Places
+        data={data}
+        setState={setState}
+        setLikes={setLikes}
+        filterDataClone={filterDataClone}
+      />
     </>
   );
 };

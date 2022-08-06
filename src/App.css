@@ -233,6 +233,9 @@ nav button {
 .searchHere {
   display: none;
 }
+select {
+  height: 30px;
+}
 /* #videoBackground {
   position: fixed;
   z-index: -1;.videoButtonContainer {
@@ -285,7 +288,11 @@ nav button {
   background: #201c2b;
   color: white;
 }
-
+.videoButtonContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
 @media (max-width: 800px) {
   video {
     display: none;

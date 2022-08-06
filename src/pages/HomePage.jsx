@@ -7,11 +7,12 @@ const HomePage = (props) => {
     nameSort,
     dataClone,
     filterState,
-    originalPlaces,
+    placesDataState,
     setLikes,
     filterDataClone,
     filterPlacesByString,
   } = props;
+
   return (
     <>
       <Video
@@ -19,9 +20,9 @@ const HomePage = (props) => {
         setState={setState}
         dataClone={dataClone}
         filterState={filterState}
-        originalPlaces={originalPlaces}
         filterDataClone={filterDataClone}
         filterPlacesByString={filterPlacesByString}
+        placesDataState={placesDataState}
       />
       <Places
         data={data}

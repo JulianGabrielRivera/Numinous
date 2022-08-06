@@ -13,6 +13,7 @@ const Video = (props) => {
     originalPlaces,
     filterDataClone,
     filterPlacesByString,
+    placesDataState,
   } = props;
 
   const continents = [
@@ -35,9 +36,10 @@ const Video = (props) => {
             return eachPlace;
           }
         });
-        console.log(filterPlaces);
+
         filterState([...filterPlaces]);
-        originalPlaces([...filterPlaces]);
+        placesDataState([...filterPlaces]);
+        console.log(filterPlaces);
       })
       .catch((err) => {
         console.log(err);
@@ -47,7 +49,7 @@ const Video = (props) => {
     axios
       .get(`${API_URL}/api/places`)
       .then((response) => {
-        setState([...response.data.message]);
+        placesDataState([...response.data.message]);
         console.log(response.data.message);
       })
       .catch((err) => console.log(err));
@@ -123,6 +125,20 @@ const Video = (props) => {
               <button>Antartica</button> */}
           </div>
         </div>
+
+        <select name='selectPlaces' id='selectPlaces'>
+          <option
+            value='
+          South America'
+          >
+            South America
+          </option>
+          <option value='North America'>North America</option>
+          <option value='Europe'>Europe</option>
+          <option value='Asia'>Asia</option>
+          <option value='Oceania'>Oceania</option>
+          <option value='Africa'>Africa</option>
+        </select>
       </div>
     </>
   );

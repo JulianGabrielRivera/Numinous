@@ -27,6 +27,7 @@ function App() {
   const [placesData, setPlacesData] = useState([]);
 
   const [filterDataClone, setFilterDataClone] = useState([]);
+
   const [firstLetter, setFirstLetter] = useState('');
 
   const [likes, setLikes] = useState(0);
@@ -132,6 +133,8 @@ function App() {
               data={placesData}
               setLikes={setLikes}
               filterDataClone={filterDataClone}
+              placesDataState={setPlacesData}
+              filterState={setFilterDataClone}
               filterPlacesByString={filterPlacesByString}
               deletePlace={deletePlace}
               filteredPlaces={filteredPlaces}

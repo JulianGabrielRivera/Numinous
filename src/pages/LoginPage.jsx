@@ -3,8 +3,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/auth.context';
 import videoBg from '../assets/video/beachvid.mp4';
-import { useInterval } from 'usehooks-ts';
-import jwt_decode from 'jwt-decode';
 
 const API_URL = process.env.REACT_APP_SERVER_URL;
 const LoginPage = (props) => {
@@ -18,10 +16,29 @@ const LoginPage = (props) => {
   const navigate = useNavigate();
   const google = window.google;
   function handleCallbackResponse(response) {
-    console.log('Encoded JWT ID token' + response.credential);
-    let userObject = jwt_decode(response.credential);
-    console.log(userObject);
-    setUser(userObject);
+    // let userObject = jwt_decode(response.credential);
+    // let googleToken = response.credential;
+    // // console.log(googleToken);.
+    // // console.log(userObject);
+    // setUser(userObject);
+    // // console.log(response);
+    console.log(response);
+    window.open('http://localhost:5005/auth/google');
+
+    navigate('/');
+    // axios
+    //   .post(`${API_URL}/auth/google`, { googleToken: googleToken })
+    //   .then((response) => {
+    //     // storeToken(response.data.authToken);
+    //     // authenticateUser();
+    //     // navigate('/');
+    //     // response.send(JSON.stringify({ token: googleToken }));
+    //     console.log(response.data);
+    //   })
+    //   .catch((error) => {
+    //     const errorDescription = error.response.data.message;
+    //     setErrorMessage(errorDescription);
+    //   });
     document.getElementById('signInDiv').hidden = true;
   }
   useEffect(() => {

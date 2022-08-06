@@ -1,10 +1,12 @@
 import { useState, useContext } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 import videoBg from '../assets/video/beachvid.mp4';
 
 const PlacesCreate = (props) => {
+  const { addPlace } = props;
+  console.log(addPlace);
   const [name, setName] = useState('');
   const [url, setUrl] = useState('');
   const [description, setDescription] = useState('');
@@ -23,6 +25,7 @@ const PlacesCreate = (props) => {
   const handleDescription = (e) => setDescription(e.target.value);
   const handleRating = (e) => setRating(e.target.value);
   const handleContinent = (e) => setContinent(e.target.value);
+  const { placeId } = useParams();
 
   const APIURL = process.env.REACT_APP_SERVER_URL;
 
@@ -34,9 +37,12 @@ const PlacesCreate = (props) => {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        console.log(response);
+        console.log(response.data.message);
+
         // forced the new state since we used a double useeffect in app
-        props.setState([...props.data]);
+        addPlace(response.data.message);
+
+        // props.setState([...props.data]);
         navigate('/');
       })
       .catch((err) => {

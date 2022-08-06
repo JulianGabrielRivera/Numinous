@@ -27,6 +27,7 @@ function App() {
   const [placesData, setPlacesData] = useState([]);
 
   const [filterDataClone, setFilterDataClone] = useState([]);
+  const [filterDataCloneTwo, setFilterDataCloneTwo] = useState([]);
 
   const [firstLetter, setFirstLetter] = useState('');
 
@@ -54,12 +55,19 @@ function App() {
     setPlacesData(placesData.filter((place) => place._id !== id));
   };
 
-  const filteredPlaces = (continent) => {
-    const filt = filterDataClone.filter(
+  // const filteredPlaces = (continent) => {
+  //   const filt = filterDataClone.filter(
+  //     (eachPlace) => eachPlace.continent === continent
+  //   );
+  //   setPlacesData(filt);
+  // };
+  const filteredPlacesTwo = (continent) => {
+    const filt = filterDataCloneTwo.filter(
       (eachPlace) => eachPlace.continent === continent
     );
     setPlacesData(filt);
   };
+
   const handleSearch = (e) => {
     // const firstLetter = setFirstLetter(e.target.value);
     setPlacesData(
@@ -84,6 +92,7 @@ function App() {
 
         setPlacesData([...response.data.message]);
         setFilterDataClone([...response.data.message]);
+        setFilterDataCloneTwo([...response.data.message]);
 
         // setPlacesDataClone([...response.data.message]);
       })
@@ -92,6 +101,7 @@ function App() {
       });
   }, []);
   console.log(filterDataClone);
+  console.log(filterDataCloneTwo, 'yo');
 
   //  shouldnt have 2 effect hooks pass the original state, add new place .. original state, newplace
   useEffect(() => {
@@ -137,9 +147,11 @@ function App() {
               filterState={setFilterDataClone}
               filterPlacesByString={filterPlacesByString}
               deletePlace={deletePlace}
-              filteredPlaces={filteredPlaces}
+              // filteredPlaces={filteredPlaces}
+              // filteredPlacesTwo={filteredPlacesTwo}
               handleSearch={handleSearch}
               showAll={showAll}
+              setFilterDataCloneTwo={setFilterDataCloneTwo}
 
               // nameSort={sortByName}
             />

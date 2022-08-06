@@ -11,6 +11,8 @@ const HomePage = (props) => {
     setLikes,
     filterDataClone,
     filterPlacesByString,
+    setFilterDataCloneTwo,
+    filteredPlacesTwo,
   } = props;
 
   return (
@@ -23,6 +25,7 @@ const HomePage = (props) => {
         filterDataClone={filterDataClone}
         filterPlacesByString={filterPlacesByString}
         placesDataState={placesDataState}
+        setFilterDataCloneTwo={setFilterDataCloneTwo}
       />
       <Places
         data={data}

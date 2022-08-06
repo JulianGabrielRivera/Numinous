@@ -14,6 +14,8 @@ const Video = (props) => {
     filterDataClone,
     filterPlacesByString,
     placesDataState,
+    setFilterDataCloneTwo,
+    filteredPlacesTwo,
   } = props;
 
   const continents = [
@@ -38,8 +40,6 @@ const Video = (props) => {
         });
 
         filterState([...filterPlaces]);
-        placesDataState([...filterPlaces]);
-        console.log(filterPlaces);
       })
       .catch((err) => {
         console.log(err);
@@ -49,7 +49,7 @@ const Video = (props) => {
     axios
       .get(`${API_URL}/api/places`)
       .then((response) => {
-        placesDataState([...response.data.message]);
+        filterState([...response.data.message]);
         console.log(response.data.message);
       })
       .catch((err) => console.log(err));

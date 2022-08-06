@@ -14,13 +14,12 @@ const HomePage = (props) => {
   } = props;
   return (
     <>
-      {/* <Video
+      <Video
         nameSort={nameSort}
         setState={setState}
         dataClone={dataClone}
         filterState={filterState}
         originalPlaces={originalPlaces}
-<<<<<<< HEAD
         filterDataClone={filterDataClone}
         filterPlacesByString={filterPlacesByString}
       />
@@ -30,10 +29,6 @@ const HomePage = (props) => {
         setLikes={setLikes}
         filterDataClone={filterDataClone}
       />
-=======
-      /> */}
-      {/* <Places data={data} setState={setState} setLikes={setLikes} /> */}
->>>>>>> d55ea5b19ba821384cdfdd855d48fe0979de498a
     </>
   );
 };

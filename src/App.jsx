@@ -14,14 +14,13 @@ import PlacesDetails from './pages/PlacesDetails';
 import SignupPage from './pages/SignupPage';
 import PlacesCreate from './pages/PlacesCreate';
 import EditProfile from './pages/EditProfile';
-<<<<<<< HEAD
-import FilterPlaces from './components/FilterPlaces';
+import HomePage from './pages/HomePage';
+import Video from './components/Video';
+
 import SearchBar from './components/SearchBar';
-=======
 
 import axios from 'axios';
 
->>>>>>> d55ea5b19ba821384cdfdd855d48fe0979de498a
 const API_URL = process.env.REACT_APP_SERVER_URL;
 
 function App() {
@@ -34,7 +33,6 @@ function App() {
 
   const [theme, setTheme] = useState('light');
 
-<<<<<<< HEAD
   const filterPlacesByString = (stringToSearch) => {
     const filteredPlaces = placesData.filter((placeElement) => {
       return placeElement.name
@@ -45,12 +43,11 @@ function App() {
   };
   // const [filteredPlacesArray, setFilteredPlacesArray] =
   //   useState(placesDataClone);
-=======
+
   const addPlace = (place) => {
     const newPlace = [...placesData, place];
     setPlacesData(newPlace);
   };
->>>>>>> d55ea5b19ba821384cdfdd855d48fe0979de498a
 
   const deletePlace = (id) => {
     setPlacesData(placesData.filter((place) => place._id !== id));
@@ -86,11 +83,8 @@ function App() {
 
         setPlacesData([...response.data.message]);
         setFilterDataClone([...response.data.message]);
-<<<<<<< HEAD
 
         // setPlacesDataClone([...response.data.message]);
-=======
->>>>>>> d55ea5b19ba821384cdfdd855d48fe0979de498a
       })
       .catch((err) => {
         console.log(err);
@@ -98,7 +92,6 @@ function App() {
   }, []);
   console.log(filterDataClone);
 
-<<<<<<< HEAD
   //  shouldnt have 2 effect hooks pass the original state, add new place .. original state, newplace
   useEffect(() => {
     axios.get(`${API_URL}/api/places`).then((response) => {
@@ -107,15 +100,14 @@ function App() {
       console.log(response.data.message);
     });
     // every time it changes it rerenders everytime placesdataclone changes it runs the useeffect and when use effect runs we update state with array of places when we delete it
-  }, [placesDataClone, likes]);
+  }, likes);
 
   useEffect(() => {
     setPlacesData([...placesData]);
 
     // every time it changes it rerenders everytime placesdataclone changes it runs the useeffect and when use effect runs we update state with array of places when we delete it
   }, [filterDataClone]);
-=======
->>>>>>> d55ea5b19ba821384cdfdd855d48fe0979de498a
+
   return (
     <div className={'App ' + theme}>
       <Navbar />
@@ -136,18 +128,16 @@ function App() {
         <Route
           path='/'
           element={
-            <Places
+            <HomePage
               data={placesData}
               setLikes={setLikes}
-<<<<<<< HEAD
               filterDataClone={filterDataClone}
               filterPlacesByString={filterPlacesByString}
-=======
               deletePlace={deletePlace}
               filteredPlaces={filteredPlaces}
               handleSearch={handleSearch}
               showAll={showAll}
->>>>>>> d55ea5b19ba821384cdfdd855d48fe0979de498a
+
               // nameSort={sortByName}
             />
           }

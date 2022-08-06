@@ -1,14 +1,11 @@
 import React, { useEffect } from 'react';
 
 import videoBg from '../assets/video/beachvid.mp4';
-<<<<<<< HEAD
+
 import axios from 'axios';
 import SearchBar from './SearchBar';
-=======
->>>>>>> d55ea5b19ba821384cdfdd855d48fe0979de498a
-
+const API_URL = process.env.REACT_APP_SERVER_URL;
 const Video = (props) => {
-<<<<<<< HEAD
   const {
     setState,
     dataClone,
@@ -56,8 +53,6 @@ const Video = (props) => {
       .catch((err) => console.log(err));
   };
 
-=======
->>>>>>> d55ea5b19ba821384cdfdd855d48fe0979de498a
   return (
     <>
       <div className='videoContainer'>
@@ -70,7 +65,6 @@ const Video = (props) => {
           id='videoBackground'
           className='video'
         />
-<<<<<<< HEAD
 
         <div className='centered'>
           <h1>Numinous</h1>
@@ -129,8 +123,6 @@ const Video = (props) => {
               <button>Antartica</button> */}
           </div>
         </div>
-=======
->>>>>>> d55ea5b19ba821384cdfdd855d48fe0979de498a
       </div>
     </>
   );

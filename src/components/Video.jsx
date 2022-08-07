@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import videoBg from '../assets/video/beachvid.mp4';
 
@@ -17,7 +17,7 @@ const Video = (props) => {
     setFilterDataCloneTwo,
     filteredPlacesTwo,
   } = props;
-
+  const [continent, setContinent] = useState('');
   const continents = [
     'South America',
     'North America',
@@ -26,7 +26,9 @@ const Video = (props) => {
     'Oceania',
     'Africa',
   ];
-
+  const handleContinents = (e) => {
+    setContinent(e.target.value);
+  };
   const handleContinent = (continent) => {
     axios
       .get(`${API_URL}/api/places`)
@@ -34,6 +36,7 @@ const Video = (props) => {
         console.log(response.data);
 
         let filterPlaces = response.data.message.filter((eachPlace) => {
+          console.log(eachPlace);
           if (eachPlace.continent === continent) {
             return eachPlace;
           }
@@ -45,6 +48,30 @@ const Video = (props) => {
         console.log(err);
       });
   };
+
+  const handleContinentTwo = (event) => {
+    axios
+      .get(`${API_URL}/api/places`)
+      .then((response) => {
+        console.log(response.data);
+
+        let filterPlaces = response.data.message.filter((eachPlace) => {
+          console.log(eachPlace);
+          if (eachPlace.continent === event.target.value) {
+            return eachPlace;
+          }
+        });
+
+        filterState([...filterPlaces]);
+        setContinent([...filterPlaces]);
+        console.log(continent);
+        console.log(filterPlaces);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  console.log(continent);
   const allPlaces = () => {
     axios
       .get(`${API_URL}/api/places`)
@@ -54,7 +81,7 @@ const Video = (props) => {
       })
       .catch((err) => console.log(err));
   };
-
+  console.log(continent);
   return (
     <>
       <div className='videoContainer'>
@@ -126,18 +153,36 @@ const Video = (props) => {
           </div>
         </div>
 
-        <select name='selectPlaces' id='selectPlaces'>
-          <option
+        <select
+          name='selectPlaces'
+          id='selectPlaces'
+          value={continent}
+          onChange={(e) => setContinent(e.target.value)}
+        >
+          {continents.map((continent) => {
+            return (
+              <option
+                value={continent}
+                onClick={(event) => handleContinentTwo(event.target.value)}
+              >
+                {continent}
+              </option>
+            );
+          })}
+          <h1></h1>
+          {/* <option
             value='
           South America'
           >
             South America
           </option>
-          <option value='North America'>North America</option>
+          <option value='North America' onChange={handleContinents}>
+            North America
+          </option>
           <option value='Europe'>Europe</option>
           <option value='Asia'>Asia</option>
           <option value='Oceania'>Oceania</option>
-          <option value='Africa'>Africa</option>
+          <option value='Africa'>Africa</option> */}
         </select>
       </div>
     </>

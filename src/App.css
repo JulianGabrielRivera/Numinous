@@ -17,6 +17,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
 }
+
 .filterButtonContainer {
   display: flex;
   flex-direction: column;

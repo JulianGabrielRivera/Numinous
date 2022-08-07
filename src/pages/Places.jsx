@@ -12,8 +12,19 @@ import { AuthContext } from '../context/auth.context';
 import Rating from '../components/Rating';
 const APIURL = process.env.REACT_APP_SERVER_URL;
 const Places = (props) => {
-  const { data, setState, setLikes, filterDataClone } = props;
+  const {
+    data,
+    setState,
+    setLikes,
+    filterDataClone,
+    likes,
+    setPlacesData,
+    filterState,
+    deletePlace,
+  } = props;
   console.log(filterDataClone);
+  console.log(data);
+
   const { storedToken } = useContext(AuthContext);
   // const [like, setLike] = useState(0);
   const { placeId } = useParams();
@@ -65,6 +76,7 @@ const Places = (props) => {
                       })
                       .then((response) => {
                         setLikes(response.data.likedUser.likes);
+
                         console.log(response.data);
                       })
                       .catch((err) => console.log(err));
@@ -139,7 +151,7 @@ const Places = (props) => {
                             },
                           })
                           .then((response) => {
-                            console.log(response);
+                            console.log(response.data.message);
 
                             // axios
                             // .post('http://localhost:5005/api/places/create', requestBody, {
@@ -156,7 +168,7 @@ const Places = (props) => {
                             //     // setPlacesDataClone([...response.data.message]);
                             //   })
                             //   .catch((err) => console.log(err));
-                            setState([...response.data.message]);
+                            deletePlace(response.data.message);
                           })
 
                           .catch((err) => {

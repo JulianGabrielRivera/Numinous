@@ -3,23 +3,24 @@ import Video from '../components/Video';
 const HomePage = (props) => {
   const {
     data,
-    setState,
+    setPlacesData,
     nameSort,
     dataClone,
     filterState,
     placesDataState,
+    likes,
     setLikes,
     filterDataClone,
     filterPlacesByString,
     setFilterDataCloneTwo,
     filteredPlacesTwo,
+    deletePlace = { deletePlace },
   } = props;
 
   return (
     <>
       <Video
         nameSort={nameSort}
-        setState={setState}
         dataClone={dataClone}
         filterState={filterState}
         filterDataClone={filterDataClone}
@@ -29,9 +30,12 @@ const HomePage = (props) => {
       />
       <Places
         data={data}
-        setState={setState}
+        setPlacesData={setPlacesData}
+        filterState={filterState}
         setLikes={setLikes}
         filterDataClone={filterDataClone}
+        likes={likes}
+        deletePlace={deletePlace}
       />
     </>
   );

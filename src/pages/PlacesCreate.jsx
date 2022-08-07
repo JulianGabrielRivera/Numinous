@@ -38,7 +38,7 @@ const PlacesCreate = (props) => {
       })
       .then((response) => {
         console.log(response.data.message);
-
+        console.log(response.data);
         // forced the new state since we used a double useeffect in app
         addPlace(response.data.message);
 

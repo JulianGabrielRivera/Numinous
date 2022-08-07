@@ -49,10 +49,15 @@ function App() {
   const addPlace = (place) => {
     const newPlace = [...placesData, place];
     setPlacesData(newPlace);
+    setFilterDataClone(newPlace);
+    setFilterDataCloneTwo(newPlace);
   };
 
   const deletePlace = (id) => {
-    setPlacesData(placesData.filter((place) => place._id !== id));
+    const filteredPlaces = placesData.filter((place) => {
+      return place._id !== id;
+    });
+    setPlacesData([filteredPlaces]);
   };
 
   // const filteredPlaces = (continent) => {
@@ -141,12 +146,14 @@ function App() {
           element={
             <HomePage
               data={placesData}
+              likes={likes}
               setLikes={setLikes}
               filterDataClone={filterDataClone}
               placesDataState={setPlacesData}
               filterState={setFilterDataClone}
               filterPlacesByString={filterPlacesByString}
               deletePlace={deletePlace}
+              setPlacesData={setPlacesData}
               // filteredPlaces={filteredPlaces}
               // filteredPlacesTwo={filteredPlacesTwo}
               handleSearch={handleSearch}

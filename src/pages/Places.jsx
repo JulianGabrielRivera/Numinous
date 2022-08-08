@@ -160,15 +160,15 @@ const Places = (props) => {
 
                             // window.location.reload(false);
 
-                            // axios
-                            //   .get('http://localhost:5005/api/places')
-                            //   .then((response) => {
-                            //     console.log(response.data.message);
-                            //     dataClone([...response.data.message]);
-                            //     // setPlacesDataClone([...response.data.message]);
-                            //   })
-                            //   .catch((err) => console.log(err));
-                            deletePlace(response.data.message);
+                            axios
+                              .get('http://localhost:5005/api/places')
+                              .then((response) => {
+                                console.log(response.data.message);
+
+                                deletePlace([...response.data.message]);
+                                // setPlacesDataClone([...response.data.message]);
+                              })
+                              .catch((err) => console.log(err));
                           })
 
                           .catch((err) => {

@@ -53,11 +53,10 @@ function App() {
     setFilterDataCloneTwo(newPlace);
   };
 
-  const deletePlace = (id) => {
-    const filteredPlaces = placesData.filter((place) => {
-      return place._id !== id;
-    });
-    setPlacesData([filteredPlaces]);
+  const deletePlace = (data) => {
+    setPlacesData(data);
+    setFilterDataClone(data);
+    setFilterDataCloneTwo(data);
   };
 
   // const filteredPlaces = (continent) => {

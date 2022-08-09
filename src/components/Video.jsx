@@ -17,7 +17,9 @@ const Video = (props) => {
     setFilterDataCloneTwo,
     filteredPlacesTwo,
   } = props;
-  const [continent, setContinent] = useState('');
+  console.log(filterDataClone);
+  const [oneContinent, setContinent] = useState('');
+  const [filterData, setFilterData] = useState([]);
   const continents = [
     'South America',
     'North America',
@@ -49,7 +51,7 @@ const Video = (props) => {
       });
   };
 
-  const handleContinentTwo = (event) => {
+  const handleContinentTwo = (continent) => {
     axios
       .get(`${API_URL}/api/places`)
       .then((response) => {
@@ -57,21 +59,24 @@ const Video = (props) => {
 
         let filterPlaces = response.data.message.filter((eachPlace) => {
           console.log(eachPlace);
-          if (eachPlace.continent === event.target.value) {
+          if (eachPlace.continent === continent) {
             return eachPlace;
           }
         });
 
         filterState([...filterPlaces]);
-        setContinent([...filterPlaces]);
-        console.log(continent);
+
+        setFilterData([...filterPlaces]);
+
         console.log(filterPlaces);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  console.log(continent);
+  console.log(filterData, 'yo');
+  console.log(oneContinent);
+
   const allPlaces = () => {
     axios
       .get(`${API_URL}/api/places`)
@@ -81,7 +86,8 @@ const Video = (props) => {
       })
       .catch((err) => console.log(err));
   };
-  console.log(continent);
+
+  console.log(filterData);
   return (
     <>
       <div className='videoContainer'>
@@ -156,20 +162,14 @@ const Video = (props) => {
         <select
           name='selectPlaces'
           id='selectPlaces'
-          value={continent}
-          onChange={(e) => setContinent(e.target.value)}
+          onChange={(e) => handleContinentTwo(e.target.value)}
         >
           {continents.map((continent) => {
-            return (
-              <option
-                value={continent}
-                onClick={(event) => handleContinentTwo(event.target.value)}
-              >
-                {continent}
-              </option>
-            );
+            return <option value={continent}>{continent}</option>;
           })}
-          <h1></h1>
+          {/* {filterDataClone.map((place) => {
+            return <h1>{place.name}</h1>;
+          })} */}
           {/* <option
             value='
           South America'

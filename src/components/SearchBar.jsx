@@ -3,10 +3,10 @@ import { SearchIcon } from '@heroicons/react/solid';
 
 const SearchPlaces = (props) => {
   const { filterDataClone, filterPlacesByString } = props;
-  console.log(filterDataClone);
+  // console.log(filterDataClone);
   const [searchTerm, setSearchTerm] = useState('');
 
-  console.log(props);
+  // console.log(props);
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
     props.filterPlacesByString(e.target.value);

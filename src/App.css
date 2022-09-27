@@ -244,6 +244,13 @@ select {
     flex-direction: row;
   }
 } */
+.xicon:hover {
+  cursor: pointer;
+}
+.numinous-title {
+  animation: bounce;
+  animation-duration: 1.5s;
+}
 @media (max-width: 750px) {
   .buttonContainer {
     flex-direction: column;

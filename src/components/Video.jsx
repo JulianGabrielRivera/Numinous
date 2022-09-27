@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import videoBg from '../assets/video/beachvid.mp4';
-
+import 'animate.css';
 import axios from 'axios';
 import SearchBar from './SearchBar';
 const API_URL = process.env.REACT_APP_SERVER_URL;
@@ -35,10 +35,10 @@ const Video = (props) => {
     axios
       .get(`${API_URL}/api/places`)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
 
         let filterPlaces = response.data.message.filter((eachPlace) => {
-          console.log(eachPlace);
+          // console.log(eachPlace);
           if (eachPlace.continent === continent) {
             return eachPlace;
           }
@@ -55,7 +55,7 @@ const Video = (props) => {
     axios
       .get(`${API_URL}/api/places`)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
 
         let filterPlaces = response.data.message.filter((eachPlace) => {
           console.log(eachPlace);
@@ -68,26 +68,26 @@ const Video = (props) => {
 
         setFilterData([...filterPlaces]);
 
-        console.log(filterPlaces);
+        // console.log(filterPlaces);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  console.log(filterData, 'yo');
-  console.log(oneContinent);
+  // console.log(filterData, 'yo');
+  // console.log(oneContinent);
 
   const allPlaces = () => {
     axios
       .get(`${API_URL}/api/places`)
       .then((response) => {
         filterState([...response.data.message]);
-        console.log(response.data.message);
+        // console.log(response.data.message);
       })
       .catch((err) => console.log(err));
   };
 
-  console.log(filterData);
+  // console.log(filterData);
   return (
     <>
       <div className='videoContainer'>
@@ -102,7 +102,7 @@ const Video = (props) => {
         />
 
         <div className='centered'>
-          <h1>Numinous</h1>
+          <h1 className='numinous-title'>Numinous</h1>
         </div>
       </div>
       <div className='videoButtonContainer'>

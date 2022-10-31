@@ -1,12 +1,12 @@
-import blackHeart from '../assets/images/heart2.png';
-import redHeart from '../assets/images/heart1.png';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { XIcon } from '@heroicons/react/solid';
-import { ThumbDownIcon } from '@heroicons/react/solid';
-import { useState, useEffect, useContext } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/auth.context';
+import blackHeart from "../assets/images/heart2.png";
+import redHeart from "../assets/images/heart1.png";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { XIcon } from "@heroicons/react/solid";
+import { ThumbDownIcon } from "@heroicons/react/solid";
+import { useState, useEffect, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/auth.context";
 const APIURL = process.env.REACT_APP_SERVER_URL;
 const Place = (props) => {
   const {
@@ -28,7 +28,7 @@ const Place = (props) => {
   const navigate = useNavigate();
 
   const goToSignUp = () => {
-    navigate('/signup');
+    navigate("/signup");
   };
   // const handleClick = () => {
   //   axios
@@ -40,24 +40,24 @@ const Place = (props) => {
   // };
 
   return (
-    <div className='imageContainer'>
+    <div className="imageContainer">
       {filterDataClone.map((place) => {
         return (
           <div key={place._id}>
             <div
               style={{
-                position: 'relative',
+                position: "relative",
 
-                padding: '20px',
+                padding: "20px",
               }}
             >
               <ThumbDownIcon
                 style={{
-                  height: '25px',
-                  position: 'absolute',
-                  left: '40',
-                  bottom: '30',
-                  color: 'none',
+                  height: "25px",
+                  position: "absolute",
+                  left: "40",
+                  bottom: "30",
+                  color: "none",
                 }}
                 onClick={(e) => {
                   e.preventDefault();
@@ -75,12 +75,12 @@ const Place = (props) => {
               />
               <img
                 src={blackHeart}
-                alt=''
+                alt=""
                 style={{
-                  height: '25px',
-                  position: 'absolute',
-                  top: '30px',
-                  left: '35px',
+                  height: "25px",
+                  position: "absolute",
+                  top: "30px",
+                  left: "35px",
                 }}
                 onMouseOver={(e) => (e.currentTarget.src = redHeart)}
                 onMouseOut={(e) => (e.currentTarget.src = blackHeart)}
@@ -100,38 +100,42 @@ const Place = (props) => {
                 }}
               />
 
-              <h5
-                style={{
-                  position: 'absolute',
+              <Link to={`/placedetails/${place._id}`}>
+                {" "}
+                <h5
+                  style={{
+                    position: "absolute",
 
-                  top: '50%',
-                  right: '50%',
-                  transform: 'translate(50%,-50%)',
-                  color: 'white',
-                  fontWeight: 'bold',
-                }}
-              >
-                {place.name}
-              </h5>
+                    top: "49%",
+                    right: "45%",
+                    transform: "translate(45%,-45%)",
+                    color: "white",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {place.name}
+                </h5>
+              </Link>
+
               {/* <Rating data={placesData} /> */}
               {/* we changed url to img because we arent using our json anymore, we are using our mongodb */}
 
               <div
-                className='placeImg'
+                className="placeImg"
                 style={{
-                  width: '300px',
-                  height: '230px',
-                  padding: '5px',
+                  width: "300px",
+                  height: "230px",
+                  padding: "5px",
                   backgroundImage: `url(${place.url})`,
-                  backgroundSize: 'cover',
-                  backgroundRepeat: 'no-repeat',
-                  borderRadius: '10px',
+                  backgroundSize: "cover",
+                  backgroundRepeat: "no-repeat",
+                  borderRadius: "10px",
                 }}
               >
                 <div>
                   <XIcon
-                    className='h-5 w-5 text-blue-500 xicon'
-                    style={{ height: '35px', float: 'right', zIndex: 1 }}
+                    className="h-5 w-5 text-blue-500 xicon"
+                    style={{ height: "35px", float: "right", zIndex: 1 }}
                     onClick={(e) => {
                       e.preventDefault();
 
@@ -152,7 +156,7 @@ const Place = (props) => {
                           // window.location.reload(false);
 
                           axios
-                            .get('http://localhost:5005/api/places')
+                            .get("http://localhost:5005/api/places")
                             .then((response) => {
                               console.log(response.data.message);
 
@@ -171,10 +175,10 @@ const Place = (props) => {
 
                 <div
                   style={{
-                    marginLeft: '60px',
-                    color: 'white',
-                    fontWeight: 'bold',
-                    fontSize: '1.2rem',
+                    marginLeft: "60px",
+                    color: "white",
+                    fontWeight: "bold",
+                    fontSize: "1.2rem",
                   }}
                 >
                   {place.likes}

@@ -1,18 +1,19 @@
-import { useState, useContext } from 'react';
-import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
-import { AuthContext } from '../context/auth.context';
-import videoBg from '../assets/video/beachvid.mp4';
+import { useState, useContext } from "react";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
+import { AuthContext } from "../context/auth.context";
+import videoBg from "../assets/video/beachvid.mp4";
 
 const PlacesCreate = (props) => {
   const { addPlace } = props;
   console.log(addPlace);
-  const [name, setName] = useState('');
-  const [url, setUrl] = useState('');
-  const [description, setDescription] = useState('');
+  const [name, setName] = useState("");
+  const [url, setUrl] = useState("");
+  const [description, setDescription] = useState("");
   const [rating, setRating] = useState(0);
-  const [continent, setContinent] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [continent, setContinent] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [price, setPrice] = useState(0);
 
   // instantiate so we could use it
   const navigate = useNavigate();
@@ -25,13 +26,16 @@ const PlacesCreate = (props) => {
   const handleDescription = (e) => setDescription(e.target.value);
   const handleRating = (e) => setRating(e.target.value);
   const handleContinent = (e) => setContinent(e.target.value);
+  const handlePrice = (e) => setPrice(e.target.value);
+  console.log(handlePrice);
+  console.log(price);
   const { placeId } = useParams();
 
   const APIURL = process.env.REACT_APP_SERVER_URL;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const requestBody = { name, url, description, rating, continent };
+    const requestBody = { name, url, description, rating, continent, price };
     axios
       .post(`${APIURL}/api/places/create`, requestBody, {
         headers: { Authorization: `Bearer ${storedToken}` },
@@ -39,73 +43,84 @@ const PlacesCreate = (props) => {
       .then((response) => {
         console.log(response.data.message);
         console.log(response.data);
+        console.log(response);
+        console.log(requestBody);
         // forced the new state since we used a double useeffect in app
         addPlace(response.data.message);
 
         // props.setState([...props.data]);
-        navigate('/');
+        navigate("/");
       })
       .catch((err) => {
         const errorDescription = err.response.data.message;
         setErrorMessage(errorDescription);
         console.log(err);
       });
-    setName('');
-    setUrl('');
-    setDescription('');
+    setName("");
+    setUrl("");
+    setDescription("");
     setRating(0);
-    setContinent('');
+    setContinent("");
+    setPrice(0);
   };
 
   return (
-    <div className='placeCreateContainer'>
+    <div className="placeCreateContainer">
       <video
         src={videoBg}
         autoPlay
         loop
         muted
-        style={{ height: '100vh', position: 'relative' }}
+        style={{ height: "100vh", position: "relative" }}
       />
       <div
-        className='placeCreateContainerInfo'
-        style={{ position: 'absolute' }}
+        className="placeCreateContainerInfo"
+        style={{ position: "absolute" }}
       >
         <h1>Create New Vacay</h1>
         <form
           onSubmit={handleSubmit}
-          style={{ display: 'flex', flexDirection: 'column', width: '200px' }}
+          style={{ display: "flex", flexDirection: "column", width: "200px" }}
         >
-          <label htmlFor='placeName'>Name:</label>
-          <input type='text' name='name' value={name} onChange={handleName} />
-          <label htmlFor=''>Image:</label>
-          <input type='text' name='url' value={url} onChange={handleUrl} />
+          <label htmlFor="placeName">Name:</label>
+          <input type="text" name="name" value={name} onChange={handleName} />
+          <label htmlFor="">Image:</label>
+          <input type="text" name="url" value={url} onChange={handleUrl} />
+          <label htmlFor="">Price:</label>
 
-          <label htmlFor=''>Description:</label>
           <input
-            type='text'
-            name='description'
+            type="number"
+            name="price"
+            value={price}
+            onChange={handlePrice}
+          />
+
+          <label htmlFor="">Description:</label>
+          <input
+            type="text"
+            name="description"
             value={description}
             onChange={handleDescription}
           />
-          <label htmlFor=''>Rating:</label>
+          <label htmlFor="">Rating:</label>
           <input
-            type='number'
+            type="number"
             value={rating}
             onChange={handleRating}
-            name='rating'
+            name="rating"
           />
-          <label htmlFor='continentName'>Continent:</label>
+          <label htmlFor="continentName">Continent:</label>
           <input
-            type='text'
-            id='continentName'
-            name='continent'
+            type="text"
+            id="continentName"
+            name="continent"
             value={continent}
             onChange={handleContinent}
           />
-          <button type='submit'>Numinous</button>
+          <button type="submit">Numinous</button>
         </form>
 
-        {errorMessage && <p className='error-message'>{errorMessage}</p>}
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
       </div>
     </div>
   );

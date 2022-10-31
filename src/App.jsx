@@ -1,25 +1,26 @@
-import './App.css';
-import './App.jsx';
+import "./App.css";
+import "./App.jsx";
 
-import { Routes, Route } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-import Navbar from './components/Navbar';
-import IsAnon from './components/IsAnon';
-import IsPrivate from './components/IsPrivate';
-import IsAdmin from './components/IsAdmin';
-import LoginPage from './pages/LoginPage';
-import Places from './pages/Places';
-import PlacesDetails from './pages/PlacesDetails';
-import SignupPage from './pages/SignupPage';
-import PlacesCreate from './pages/PlacesCreate';
-import EditProfile from './pages/EditProfile';
-import HomePage from './pages/HomePage';
-import Video from './components/Video';
+import Navbar from "./components/Navbar";
+import IsAnon from "./components/IsAnon";
+import IsPrivate from "./components/IsPrivate";
+import IsAdmin from "./components/IsAdmin";
+import LoginPage from "./pages/LoginPage";
+import Places from "./pages/Places";
+import PlacesDetails from "./pages/PlacesDetails";
+import SignupPage from "./pages/SignupPage";
+import PlacesCreate from "./pages/PlacesCreate";
+import EditProfile from "./pages/EditProfile";
+import HomePage from "./pages/HomePage";
+import Cart from "./pages/Cart";
+import Video from "./components/Video";
 
-import SearchBar from './components/SearchBar';
+import SearchBar from "./components/SearchBar";
 
-import axios from 'axios';
+import axios from "axios";
 
 const API_URL = process.env.REACT_APP_SERVER_URL;
 
@@ -29,11 +30,11 @@ function App() {
   const [filterDataClone, setFilterDataClone] = useState([]);
   const [filterDataCloneTwo, setFilterDataCloneTwo] = useState([]);
 
-  const [firstLetter, setFirstLetter] = useState('');
+  const [firstLetter, setFirstLetter] = useState("");
 
   const [likes, setLikes] = useState(0);
 
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState("light");
 
   const filterPlacesByString = (stringToSearch) => {
     const filteredPlaces = placesData.filter((placeElement) => {
@@ -92,7 +93,7 @@ function App() {
     axios
       .get(`${API_URL}/api/places`)
       .then((response) => {
-        // console.log(response.data.message);
+        console.log(response.data.message);
 
         setPlacesData([...response.data.message]);
         setFilterDataClone([...response.data.message]);
@@ -124,24 +125,24 @@ function App() {
   }, [filterDataClone]);
 
   return (
-    <div className={'App ' + theme}>
+    <div className={"App " + theme}>
       <Navbar />
       <select
         onChange={(event) => setTheme(event.target.value)}
         style={{
-          position: 'absolute',
-          left: '10px',
-          zIndex: '1',
-          top: '150px',
+          position: "absolute",
+          left: "10px",
+          zIndex: "1",
+          top: "150px",
         }}
       >
-        <option value='light'> Light </option>
-        <option value='dark'> Dark </option>
+        <option value="light"> Light </option>
+        <option value="dark"> Dark </option>
       </select>
 
       <Routes>
         <Route
-          path='/'
+          path="/"
           element={
             <HomePage
               data={placesData}
@@ -165,7 +166,7 @@ function App() {
         />
 
         <Route
-          path='/signup'
+          path="/signup"
           element={
             <IsAnon>
               <SignupPage />
@@ -173,7 +174,7 @@ function App() {
           }
         />
         <Route
-          path='/login'
+          path="/login"
           element={
             <IsAnon>
               <LoginPage />
@@ -183,7 +184,7 @@ function App() {
         {/* 
         <Route path='/map' element={<SimpleMap />} /> */}
         <Route
-          path='/placedetails/:id'
+          path="/placedetails/:id"
           element={
             <IsPrivate>
               <PlacesDetails data={placesData} />
@@ -191,7 +192,7 @@ function App() {
           }
         />
         <Route
-          path='/places-create'
+          path="/places-create"
           element={
             <IsPrivate>
               <IsAdmin>
@@ -201,10 +202,18 @@ function App() {
           }
         />
         <Route
-          path='/edit'
+          path="/edit"
           element={
             <IsPrivate>
               <EditProfile />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <IsPrivate>
+              <Cart />
             </IsPrivate>
           }
         />

@@ -1,10 +1,11 @@
-import { useParams } from 'react-router-dom';
-import { XIcon } from '@heroicons/react/solid';
-import { useState, useEffect, useContext } from 'react';
-import Rating from '../components/Rating';
-import axios from 'axios';
+import { useParams } from "react-router-dom";
+import { XIcon } from "@heroicons/react/solid";
+import { useState, useEffect, useContext } from "react";
+import Rating from "../components/Rating";
+import axios from "axios";
 
-import { AuthContext } from '../context/auth.context';
+import { AuthContext } from "../context/auth.context";
+import { storeContext } from "../context/store.context";
 const APIURL = process.env.REACT_APP_SERVER_URL;
 {
   /* <img
@@ -25,11 +26,12 @@ const PlacesDetails = (props) => {
   // const { data } = props;
   // console.log(data);
   const { storedToken } = useContext(AuthContext);
+  const { decQty, incQty, qty, onAdd } = useContext(storeContext);
 
   const [placeData, setPlaceData] = useState(null);
 
   // grab the comment data and send to back end.
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState("");
 
   const handleContent = (e) => setContent(e.target.value);
 
@@ -43,7 +45,7 @@ const PlacesDetails = (props) => {
       })
       .then((response) => {
         console.log(response);
-        setContent('');
+        setContent("");
         // triggers rerender
         // copy old state and add new comment to state
         setPlaceData({
@@ -75,44 +77,69 @@ const PlacesDetails = (props) => {
       <div
         key={placeData._id}
         style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
       >
         <div
           style={{
-            height: '500px',
-            width: '50vw',
-            padding: '10px',
+            height: "500px",
+            width: "50vw",
+            padding: "10px",
             backgroundImage: `url(${placeData.url})`,
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-            marginTop: '20px',
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            marginTop: "20px",
           }}
         ></div>
         <h5>{placeData.name}</h5>
-
+        <p>{placeData.price}</p>
+        <div style={{ display: "flex" }}>
+          <button style={{ width: 25, height: 25 }} onClick={decQty}>
+            -
+          </button>
+          <span>{qty}</span>
+          <button style={{ width: 25, height: 25 }} onClick={incQty}>
+            +
+          </button>
+        </div>
+        <div style={{ display: "flex" }}>
+          <button
+            type="button"
+            onClick={() => onAdd(placeData, qty)}
+            style={{ marginRight: "5px", borderRadius: "8px", width: "100px" }}
+          >
+            Add to Cart
+          </button>
+          <button
+            type="button"
+            onClick=""
+            style={{ marginRight: "5px", borderRadius: "8px", width: "100px" }}
+          >
+            Buy Now
+          </button>
+        </div>
         <Rating data={placeData.rating} />
-        <p style={{ textAlign: 'left', padding: '20px', width: '800px' }}>
+        <p style={{ textAlign: "left", padding: "20px", width: "800px" }}>
           {placeData.description}
         </p>
         <div
           style={{
-            display: 'flex',
-            flexDirection: 'column',
-            height: '100px',
-            width: '300px',
-            overflowY: 'scroll',
-            textAlign: 'center',
-            alignItems: 'center',
-            border: '1px solid black',
+            display: "flex",
+            flexDirection: "column",
+            height: "100px",
+            width: "300px",
+            overflowY: "scroll",
+            textAlign: "center",
+            alignItems: "center",
+            border: "1px solid black",
           }}
         >
           {placeData.comments.map((comment) => {
             return (
-              <div style={{ display: 'flex' }}>
-                <span style={{ marginRight: '0.8rem' }}>
+              <div style={{ display: "flex" }}>
+                <span style={{ marginRight: "0.8rem" }}>
                   {comment.author.name}
                 </span>
                 <p>{comment.content}</p>
@@ -123,21 +150,21 @@ const PlacesDetails = (props) => {
         <form
           onSubmit={handleSubmit}
           style={{
-            display: 'flex',
-            flexDirection: 'column',
-            marginTop: '40px',
+            display: "flex",
+            flexDirection: "column",
+            marginTop: "40px",
           }}
         >
           <textarea
-            name='content'
+            name="content"
             value={content}
-            id='setComment'
-            cols='30'
-            rows='2'
+            id="setComment"
+            cols="30"
+            rows="2"
             onChange={handleContent}
           ></textarea>
 
-          <button type='submit'>Post Comment</button>
+          <button type="submit">Post Comment</button>
         </form>
       </div>
     )

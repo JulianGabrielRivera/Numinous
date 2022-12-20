@@ -1,4 +1,4 @@
-import Place from './Place';
+import Place from "./Place";
 
 const APIURL = process.env.REACT_APP_SERVER_URL;
 const Places = (props) => {
@@ -12,6 +12,7 @@ const Places = (props) => {
     filterState,
     deletePlace,
   } = props;
+
   // console.log(filterDataClone);
   // console.log(data);
 

@@ -1,6 +1,12 @@
-import Places from './Places';
-import Video from '../components/Video';
+import Places from "./Places";
+import Video from "../components/Video";
+import { AuthContext } from "../context/auth.context";
+import { useEffect, useContext, useState } from "react";
+import axios from "axios";
+
 const HomePage = (props) => {
+  const { storedToken, setTotalLiked, totalLikes } = useContext(AuthContext);
+
   const {
     data,
     setPlacesData,
@@ -14,7 +20,8 @@ const HomePage = (props) => {
     filterPlacesByString,
     setFilterDataCloneTwo,
     filteredPlacesTwo,
-    deletePlace = { deletePlace },
+
+    deletePlace,
   } = props;
 
   return (
@@ -27,6 +34,7 @@ const HomePage = (props) => {
         filterPlacesByString={filterPlacesByString}
         placesDataState={placesDataState}
         setFilterDataCloneTwo={setFilterDataCloneTwo}
+        totalLikes={totalLikes}
       />
       <Places
         data={data}
@@ -35,6 +43,7 @@ const HomePage = (props) => {
         setLikes={setLikes}
         filterDataClone={filterDataClone}
         likes={likes}
+        setFilterDataCloneTwo={setFilterDataCloneTwo}
         deletePlace={deletePlace}
       />
     </>

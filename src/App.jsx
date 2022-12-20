@@ -16,11 +16,14 @@ import PlacesCreate from "./pages/PlacesCreate";
 import EditProfile from "./pages/EditProfile";
 import HomePage from "./pages/HomePage";
 import Cart from "./pages/Cart";
+import PastOrders from "./pages/PastOrders";
 import Video from "./components/Video";
 
 import SearchBar from "./components/SearchBar";
 
 import axios from "axios";
+import ShippingInfoPage from "./pages/CheckoutPage";
+import MyLikedPlaces from "./pages/MyLikedPlaces";
 
 const API_URL = process.env.REACT_APP_SERVER_URL;
 
@@ -93,8 +96,6 @@ function App() {
     axios
       .get(`${API_URL}/api/places`)
       .then((response) => {
-        console.log(response.data.message);
-
         setPlacesData([...response.data.message]);
         setFilterDataClone([...response.data.message]);
         setFilterDataCloneTwo([...response.data.message]);
@@ -109,14 +110,14 @@ function App() {
   // console.log(filterDataCloneTwo, 'yo');
 
   //  shouldnt have 2 effect hooks pass the original state, add new place .. original state, newplace
-  useEffect(() => {
-    axios.get(`${API_URL}/api/places`).then((response) => {
-      setPlacesData([...response.data.message]);
+  // useEffect(() => {
+  //   axios.get(`${API_URL}/api/places`).then((response) => {
+  //     setPlacesData([...response.data.message]);
 
-      // console.log(response.data.message);
-    });
-    // every time it changes it rerenders everytime placesdataclone changes it runs the useeffect and when use effect runs we update state with array of places when we delete it
-  }, likes);
+  //     // console.log(response.data.message);
+  //   });
+  //   // every time it changes it rerenders everytime placesdataclone changes it runs the useeffect and when use effect runs we update state with array of places when we delete it
+  // }, [likes]);
 
   useEffect(() => {
     setPlacesData([...placesData]);
@@ -127,7 +128,7 @@ function App() {
   return (
     <div className={"App " + theme}>
       <Navbar />
-      <select
+      {/* <select
         onChange={(event) => setTheme(event.target.value)}
         style={{
           position: "absolute",
@@ -138,33 +139,9 @@ function App() {
       >
         <option value="light"> Light </option>
         <option value="dark"> Dark </option>
-      </select>
+      </select> */}
 
       <Routes>
-        <Route
-          path="/"
-          element={
-            <HomePage
-              data={placesData}
-              likes={likes}
-              setLikes={setLikes}
-              filterDataClone={filterDataClone}
-              placesDataState={setPlacesData}
-              filterState={setFilterDataClone}
-              filterPlacesByString={filterPlacesByString}
-              deletePlace={deletePlace}
-              setPlacesData={setPlacesData}
-              // filteredPlaces={filteredPlaces}
-              // filteredPlacesTwo={filteredPlacesTwo}
-              handleSearch={handleSearch}
-              showAll={showAll}
-              setFilterDataCloneTwo={setFilterDataCloneTwo}
-
-              // nameSort={sortByName}
-            />
-          }
-        />
-
         <Route
           path="/signup"
           element={
@@ -179,6 +156,29 @@ function App() {
             <IsAnon>
               <LoginPage />
             </IsAnon>
+          }
+        />
+        <Route
+          path="/"
+          element={
+            <HomePage
+              data={placesData}
+              likes={likes}
+              setLikes={setLikes}
+              filterDataClone={filterDataClone}
+              setFilterDataCloneTwo={setFilterDataCloneTwo}
+              placesDataState={setPlacesData}
+              filterState={setFilterDataClone}
+              filterPlacesByString={filterPlacesByString}
+              deletePlace={deletePlace}
+              setPlacesData={setPlacesData}
+              // filteredPlaces={filteredPlaces}
+              // filteredPlacesTwo={filteredPlacesTwo}
+              handleSearch={handleSearch}
+              showAll={showAll}
+
+              // nameSort={sortByName}
+            />
           }
         />
         {/* 
@@ -217,6 +217,24 @@ function App() {
             </IsPrivate>
           }
         />
+        <Route
+          path="/shipping"
+          element={
+            <IsPrivate>
+              <ShippingInfoPage />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/past-orders"
+          element={
+            <IsPrivate>
+              <PastOrders />
+            </IsPrivate>
+          }
+        />
+
+        <Route path="/mylikedplaces" element={<MyLikedPlaces />} />
       </Routes>
     </div>
   );

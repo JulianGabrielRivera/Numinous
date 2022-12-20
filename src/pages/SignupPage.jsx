@@ -1,16 +1,16 @@
-import { useState } from 'react';
-import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
-import videoBg from '../assets/video/beachvid.mp4';
-import { Button } from 'react-bootstrap';
-import { Form } from 'react-bootstrap';
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate, Link } from "react-router-dom";
+import videoBg from "../assets/video/beachvid.mp4";
+import { Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 const APIURL = process.env.REACT_APP_SERVER_URL;
 const SignupPage = (props) => {
   // storing the values for each here
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   // instantiate so we could use it
   const navigate = useNavigate();
@@ -36,70 +36,70 @@ const SignupPage = (props) => {
       .post(`${APIURL}/auth/signup`, requestBody)
       .then((response) => {
         console.log(response);
-        navigate('/login');
+        navigate("/login");
       })
       .catch((err) => {
         const errorDescription = err.response.data.message;
         setErrorMessage(errorDescription);
         console.group(err);
       });
-    setEmail('');
-    setPassword('');
-    setName('');
+    setEmail("");
+    setPassword("");
+    setName("");
   };
 
   return (
-    <div className='signUpContainer'>
+    <div className="signUpContainer">
       <video
         src={videoBg}
         autoPlay
         loop
         muted
-        style={{ height: '100vh', position: 'relative' }}
+        style={{ height: "100vh", position: "relative" }}
       />
-      <div className='signUpContainerInfo' style={{ position: 'absolute' }}>
+      <div className="signUpContainerInfo" style={{ position: "absolute" }}>
         <h1>Sign UPPER!</h1>
 
         <div
-          style={{ display: 'flex', justifyContent: 'center', width: '100vw' }}
+          style={{ display: "flex", justifyContent: "center", width: "100vw" }}
         >
-          <Form style={{ width: '400px' }} onSubmit={handleSubmit}>
-            <Form.Group className='mb-3' controlId='formBasicEmail'>
+          <Form style={{ width: "400px" }} onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email</Form.Label>
               <Form.Control
-                type='email'
-                placeholder='Enter email'
+                type="email"
+                placeholder="Enter email"
                 value={email}
                 onChange={handleEmail}
               />
             </Form.Group>
 
-            <Form.Group className='mb-3' controlId='formBasicPassword'>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
-                type='password'
-                placeholder='Password'
+                type="password"
+                placeholder="Password"
                 onChange={handlePassword}
                 // style={{ width: '400px' }}
               />
             </Form.Group>
-            <Form.Group className='mb-3' controlId='formBasicEmail'>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Name</Form.Label>
               <Form.Control
-                type='text'
-                placeholder='Enter your name'
+                type="text"
+                placeholder="Enter your name"
                 value={name}
                 onChange={handleName}
               />
             </Form.Group>
-            <Link to={'/password'} style={{ color: 'lightgray' }}>
+            <Link to={"/password"} style={{ color: "lightgray" }}>
               Forgot password?
             </Link>
             <div>
               <Button
-                variant='primary'
-                type='submit'
-                style={{ marginTop: '20px', borderRadius: '10px' }}
+                variant="primary"
+                type="submit"
+                style={{ marginTop: "20px", borderRadius: "10px" }}
               >
                 Submit
               </Button>
@@ -107,14 +107,14 @@ const SignupPage = (props) => {
           </Form>
         </div>
 
-        {errorMessage && <p className='error-message'>{errorMessage}</p>}
-        <p style={{ marginTop: '10px' }}>Already have an account?</p>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+        <p style={{ marginTop: "10px" }}>Already have an account?</p>
         <Link
-          to={'/login'}
+          to={"/login"}
           style={{
-            textDecoration: 'none',
-            color: '#343a40',
-            fontWeight: 'bold',
+            textDecoration: "none",
+            color: "#343a40",
+            fontWeight: "bold",
           }}
         >
           Login

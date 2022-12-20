@@ -2,10 +2,11 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Sora', sans-serif;
+  font-family: "Sora", sans-serif;
 }
 body {
   background-color: #f1f2f6;
+  height: 100vh;
 }
 
 .videoContainer {
@@ -13,7 +14,7 @@ body {
   flex-direction: column;
   width: 100%;
   height: 400px;
-  background: url('./assets/images/beach4.jpg');
+  background: url("./assets/images/beach4.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -71,7 +72,7 @@ body {
 }
 
 .editContainerInfo h1 {
-  font-family: 'Sora', sans-serif;
+  font-family: "Sora", sans-serif;
   font-size: 2rem;
   font-weight: bold;
 }
@@ -79,7 +80,7 @@ body {
   font-weight: bold;
 }
 .editContainerInfo button {
-  font-family: 'Sora', sans-serif;
+  font-family: "Sora", sans-serif;
   background: none;
   font-weight: bold;
   color: #343a40;
@@ -106,7 +107,7 @@ body {
   border-radius: 7px; */
 }
 .signUpContainerInfo h1 {
-  font-family: 'Sora', sans-serif;
+  font-family: "Sora", sans-serif;
   font-size: 2rem;
   font-weight: bold;
 }
@@ -114,7 +115,7 @@ body {
   font-weight: bold;
 }
 .signUpContainerInfo button {
-  font-family: 'Sora', sans-serif;
+  font-family: "Sora", sans-serif;
   background: none;
   font-weight: bold;
   color: #343a40;
@@ -139,7 +140,7 @@ body {
 }
 
 .loginContainerInfo h1 {
-  font-family: 'Sora', sans-serif;
+  font-family: "Sora", sans-serif;
   font-size: 2rem;
   font-weight: bold;
 }
@@ -147,7 +148,7 @@ body {
   font-weight: bold;
 }
 .loginContainerInfo button {
-  font-family: 'Sora', sans-serif;
+  font-family: "Sora", sans-serif;
   background: none;
   font-weight: bold;
   color: #343a40;
@@ -171,7 +172,7 @@ body {
   border-radius: 7px;
 }
 .placeCreateContainerInfo h1 {
-  font-family: 'Sora', sans-serif;
+  font-family: "Sora", sans-serif;
   font-size: 2rem;
   font-weight: bold;
 }
@@ -179,7 +180,7 @@ body {
   font-weight: bold;
 }
 .placeCreateContainerInfo button {
-  font-family: 'Sora', sans-serif;
+  font-family: "Sora", sans-serif;
   background: none;
   font-weight: bold;
   color: #343a40;
@@ -194,7 +195,7 @@ body {
 .centered h1 {
   color: #343a40;
   font-weight: bold;
-  font-family: 'Sora', sans-serif;
+  font-family: "Sora", sans-serif;
   font-size: 2.2rem;
 }
 
@@ -251,17 +252,68 @@ select {
   animation: bounce;
   animation-duration: 1.5s;
 }
+.checkoutContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 30px;
+  flex-direction: row;
+  height: 100vh;
+  text-align: right;
+}
+.savedCardInfo {
+  display: flex;
+}
+.bagCount {
+  position: absolute;
+  top: 65%;
+  color: green;
+  font-weight: bold;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+}
+.likeCount {
+  position: absolute;
+  top: 52%;
+  color: white;
+  font-weight: bold;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+}
+.checkoutForm {
+  display: flex;
+  width: 100vw;
+  justify-content: space-around;
+}
+/* .checkoutContainer form {
+  display: flex;
+  margin: 30px;
+} */
+.eachPlaceLiked {
+  margin-top: 100px;
+  justify-content: space-around;
+  display: flex;
+}
+.placesLiked {
+  display: flex;
+
+  flex-direction: column;
+}
+
 @media (max-width: 750px) {
   .buttonContainer {
     flex-direction: column;
   }
+
   .signUpContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: url('./assets/images/beach4.jpg');
+    background: url("./assets/images/beach4.jpg");
     background-size: cover;
     background-repeat: no-repeat;
   }
@@ -283,6 +335,7 @@ select {
 
     /* height: 80px; */
   }
+
   .buttonContainer {
     display: flex;
     flex-direction: row;

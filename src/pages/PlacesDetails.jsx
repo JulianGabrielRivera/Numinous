@@ -34,7 +34,13 @@ const PlacesDetails = (props) => {
   const [content, setContent] = useState("");
 
   const handleContent = (e) => setContent(e.target.value);
-
+  // const setProductsInCart = () => {
+  //   localStorage.setItem("places", JSON.stringify(placeData));
+  //   if (!localStorage.getItem("cart")) {
+  //     localStorage.setItem("cart", "[]");
+  //   }
+  // };
+  // setProductsInCart();
   const handleSubmit = (e) => {
     e.preventDefault();
     const requestBody = { content };
@@ -107,7 +113,11 @@ const PlacesDetails = (props) => {
         <div style={{ display: "flex" }}>
           <button
             type="button"
-            onClick={() => onAdd(placeData, qty)}
+            onClick={() => {
+              onAdd(placeData, qty);
+
+              // addItemtoLocalStorageCart(placeData._id, qty);
+            }}
             style={{ marginRight: "5px", borderRadius: "8px", width: "100px" }}
           >
             Add to Cart

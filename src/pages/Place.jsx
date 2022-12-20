@@ -7,29 +7,29 @@ import { ThumbDownIcon } from "@heroicons/react/solid";
 import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
-const APIURL = process.env.REACT_APP_SERVER_URL;
+import { motion } from "framer-motion";
+// const APIURL = process.env.REACT_APP_SERVER_URL;
 const Place = (props) => {
+  const [newPlace, setNewPlace] = useState([]);
+  const [isLiked, setIsLiked] = useState(false);
+
   const {
-    data,
-    setState,
-    setLikes,
     filterDataClone,
-    likes,
-    setPlacesData,
+
     filterState,
     deletePlace,
   } = props;
+
+  const { storedToken, user, totalLikes, setTotalLiked } =
+    useContext(AuthContext);
+  console.log(user);
   console.log(filterDataClone);
-  console.log(data);
-
-  const { storedToken } = useContext(AuthContext);
-  // const [like, setLike] = useState(0);
-  const { placeId } = useParams();
+  console.log(isLiked);
   const navigate = useNavigate();
-
   const goToSignUp = () => {
     navigate("/signup");
   };
+
   // const handleClick = () => {
   //   axios
   //     .post(`${APIURL}/api/like/${placeId}`)
@@ -38,10 +38,12 @@ const Place = (props) => {
   //     })
   //     .catch((err) => console.log(err));
   // };
-
+  // console.log(user.places, "yo");
+  let newArr;
   return (
-    <div className="imageContainer">
+    <motion.div className="imageContainer">
       {filterDataClone.map((place) => {
+        console.log(place);
         return (
           <div key={place._id}>
             <div
@@ -61,14 +63,53 @@ const Place = (props) => {
                 }}
                 onClick={(e) => {
                   e.preventDefault();
+                  console.log(isLiked);
+                  // if (isLiked)
                   axios
-                    .post(`${APIURL}/api/unlike/${place._id}`, {
-                      headers: {
-                        Authorization: `Bearer ${storedToken}`,
-                      },
-                    })
+                    .post(
+                      `${process.env.REACT_APP_SERVER_URL}/api/unlike/${place._id}`,
+                      null,
+                      {
+                        headers: {
+                          Authorization: `Bearer ${storedToken}`,
+                        },
+                      }
+                    )
                     .then((response) => {
-                      console.log(response.data.likey);
+                      // setIsLiked(response.data.likedUser.isLiked);
+                      // console.log(isLiked);
+
+                      // let foundPlace = response.data.likedUser._id;
+                      // console.log(foundPlace);
+                      // console.log(response.data.user.places);
+                      // response.data.user.places.forEach((place) => {
+                      //   if (foundPlace !== place._id) {
+                      //     setIsLiked(response.data.likedUser.isLiked);
+                      //     console.log(isLiked);
+                      //   }
+                      // });
+                      // let newArr = filterDataClone.map((item) => {
+                      //   // console.log(item._id);
+                      //   // console.log(response.data.likedUser._id);
+                      //   if (item._id === response.data.likedUser._id)
+                      //     return {
+                      //       ...item,
+                      //       likes: response.data.likedUser.likes,
+                      //       isLiked: false,
+                      //     };
+                      //   else {
+                      //     console.log("hey");
+                      //     return { ...item };
+                      //   }
+                      // });
+                      // console.log(response.data.likedUser.isLiked);
+                      // console.log(newArr);
+
+                      console.log(response.data.likedUser);
+                      setIsLiked(response.data.likedUser.isLiked);
+                      console.log(isLiked);
+                      filterState(response.data.newUser);
+                      setTotalLiked(response.data.newUser.length);
                     })
                     .catch((err) => console.log(err));
                 }}
@@ -86,17 +127,88 @@ const Place = (props) => {
                 onMouseOut={(e) => (e.currentTarget.src = blackHeart)}
                 onClick={(e) => {
                   e.preventDefault();
-                  axios
-                    .post(`${APIURL}/api/like/${place._id}`, {
-                      headers: {
-                        Authorization: `Bearer ${storedToken}`,
-                      },
-                    })
-                    .then((response) => {
-                      // setLikes(response.data.likedUser.likes);
-                      // console.log(response.data);
-                    })
-                    .catch((err) => console.log(err));
+                  console.log(!isLiked);
+                  if (!isLiked)
+                    axios
+                      .post(
+                        `${process.env.REACT_APP_SERVER_URL}/api/like/${place._id}`,
+                        { totalLikes },
+                        {
+                          headers: {
+                            Authorization: `Bearer ${storedToken}`,
+                          },
+                        }
+                      )
+                      .then((response) => {
+                        // console.log(response);
+                        // console.log(response.data.likedUser.isLiked);
+                        // // setIsLiked(response.data.likedUser.isLiked);
+                        // console.log(response.data.likedUser);
+                        // let foundPlace = response.data.likedUser._id;
+                        // console.log(foundPlace);
+
+                        // response.data.user.places.forEach((place) => {
+                        //   console.log(place);
+                        //   if (foundPlace === place._id) {
+                        //     setIsLiked(true);
+                        //     console.log(isLiked);
+                        //   }
+                        // });
+                        console.log(response);
+                        console.log(response.data.newUser);
+                        // const arrayofPlaces = response.data.user.places;
+                        // const newArr2 = arrayofPlaces.map((place) => {
+                        //   if (place._id === response.data.likedUser._id) {
+                        //     return {
+                        //       ...place,
+                        //       likes: response.data.likedUser.likes,
+                        //       isLiked: true,
+                        //     };
+                        //   } else {
+                        //     return { ...place };
+                        //   }
+                        // });
+                        // console.log(newArr2);
+                        // if (arrayofPlaces.includes(response.data.likedUser)) {
+                        //   setIsLiked(true);
+                        //   console.log(isLiked);
+                        // } else {
+                        //   setIsLiked(false);
+                        //   console.log(isLiked);
+                        // }
+                        // let newArr = filterDataClone.map((item) => {
+                        //   if (item._id === response.data.likedUser._id) {
+                        //     return {
+                        //       ...item,
+                        //       likes: response.data.likedUser.likes,
+                        //       isLiked: isLiked,
+                        //     };
+                        //   } else {
+                        //     console.log("yo");
+                        //     return { ...item };
+                        //   }
+                        // });
+                        // console.log(response.data.likedUser.isLiked);
+                        setIsLiked(response.data.likedUser.isLiked);
+                        filterState(response.data.newUser);
+                        setTotalLiked(response.data.newUser.length);
+
+                        // setPlacesData([...newArr, response.data.likedUser]);
+                        // filterState([...newArr, response.data.likedUser]);
+
+                        // if (response.data.likedUser._id === place._id) {
+
+                        //   data.filter()
+                        // }
+
+                        // setPlacesData([...data, response.data.likedUser]);
+                        // console.log(newPlace);
+                        // setLikes(
+                        //   (likes) => (likes += response.data.likedUser.likes)
+                        // );
+                        // setPlacesData([...dat]);
+                      })
+                      .catch((err) => console.log(err));
                 }}
               />
 
@@ -120,7 +232,8 @@ const Place = (props) => {
               {/* <Rating data={placesData} /> */}
               {/* we changed url to img because we arent using our json anymore, we are using our mongodb */}
 
-              <div
+              <motion.div
+                layout
                 className="placeImg"
                 style={{
                   width: "300px",
@@ -140,11 +253,14 @@ const Place = (props) => {
                       e.preventDefault();
 
                       axios
-                        .delete(`${APIURL}/api/places/${place._id}`, {
-                          headers: {
-                            Authorization: `Bearer ${storedToken}`,
-                          },
-                        })
+                        .delete(
+                          `${process.env.REACT_APP_SERVER_URL}/api/places/${place._id}`,
+                          {
+                            headers: {
+                              Authorization: `Bearer ${storedToken}`,
+                            },
+                          }
+                        )
                         .then((response) => {
                           console.log(response.data.message);
 
@@ -183,13 +299,13 @@ const Place = (props) => {
                 >
                   {place.likes}
                 </div>
-              </div>
+              </motion.div>
               {/* <img src={place.img} alt='' style={imageSize} /> */}
             </div>
           </div>
         );
       })}
-    </div>
+    </motion.div>
   );
 };
 

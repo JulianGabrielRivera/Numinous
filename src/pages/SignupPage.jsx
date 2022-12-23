@@ -39,9 +39,7 @@ const SignupPage = (props) => {
         navigate("/login");
       })
       .catch((err) => {
-        const errorDescription = err.response.data.message;
-        setErrorMessage(errorDescription);
-        console.group(err);
+        console.log(err);
       });
     setEmail("");
     setPassword("");

@@ -8,6 +8,7 @@ import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { motion } from "framer-motion";
+import { useDrag } from "react-dnd";
 // const APIURL = process.env.REACT_APP_SERVER_URL;
 const Place = (props) => {
   const [newPlace, setNewPlace] = useState([]);
@@ -29,6 +30,13 @@ const Place = (props) => {
   const goToSignUp = () => {
     navigate("/signup");
   };
+  const [{ isDragging }, dragRef] = useDrag(() => ({
+    type: "div",
+
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  }));
 
   // const handleClick = () => {
   //   axios
@@ -40,18 +48,19 @@ const Place = (props) => {
   // };
   // console.log(user.places, "yo");
   let newArr;
+
   return (
     <motion.div className="imageContainer">
-      {filterDataClone.map((place) => {
-        console.log(place);
+      {filterDataClone.map((place, i) => {
+        console.log(place, i);
         return (
           <div key={place._id}>
             <div
               style={{
                 position: "relative",
-
                 padding: "20px",
               }}
+              ref={dragRef}
             >
               <ThumbDownIcon
                 style={{
@@ -154,6 +163,7 @@ const Place = (props) => {
                         //     console.log(isLiked);
                         //   }
                         // });
+                        console.log("yo");
                         console.log(response);
                         console.log(response.data.newUser);
                         // const arrayofPlaces = response.data.user.places;
@@ -232,7 +242,7 @@ const Place = (props) => {
               {/* <Rating data={placesData} /> */}
               {/* we changed url to img because we arent using our json anymore, we are using our mongodb */}
 
-              <motion.div
+              <div
                 layout
                 className="placeImg"
                 style={{
@@ -243,7 +253,9 @@ const Place = (props) => {
                   backgroundSize: "cover",
                   backgroundRepeat: "no-repeat",
                   borderRadius: "10px",
+                  border: isDragging ? "1px solid black" : "0px",
                 }}
+                // ref={(ref) => (place[i] = ref)}
               >
                 <div>
                   <XIcon
@@ -299,7 +311,7 @@ const Place = (props) => {
                 >
                   {place.likes}
                 </div>
-              </motion.div>
+              </div>
               {/* <img src={place.img} alt='' style={imageSize} /> */}
             </div>
           </div>

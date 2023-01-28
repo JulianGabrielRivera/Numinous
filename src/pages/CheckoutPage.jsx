@@ -287,20 +287,20 @@ function ShippingInfoPage() {
             {cartItems.map((item) => {
               return (
                 <>
-                  <div style={{ display: "flex" }}>
-                    <img src={item.url} width={200} alt="" />
-                    <div style={{ display: "flex", flexDirection: "column" }}>
-                      <h1>{item.name}</h1>
-                      <p>{item.price}</p>
-                    </div>
-                  </div>
+                  {/* <div style={{ display: "flex" }}> */}
+                  <img src={item.url} width={200} alt="" />
+                  {/* <div style={{ display: "flex", flexDirection: "column" }}> */}
+                  <h1 style={{ fontSize: "20px" }}>{item.name}</h1>
+                  <p>{item.price}</p>
+                  {/* </div> */}
+                  {/* </div> */}
                 </>
               );
             })}
+            <button className="btn btn-secondary bt-lg mt-3" type="submit">
+              Place your order
+            </button>
           </div>
-          <button className="btn btn-secondary bt-lg mt-3" type="submit">
-            Place your order
-          </button>
           <Toaster />
         </form>
       </div>

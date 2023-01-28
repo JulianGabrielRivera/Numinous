@@ -20,3 +20,39 @@ code {
 .imageBorder {
   border-radius: 5px;
 }
+.product-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-grow: 1;
+  margin-top: 60px;
+}
+/* .product-container div {
+  width: 33%;
+} */
+
+.product-container h1 {
+  font-size: 14px;
+}
+.cart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.shopping-cost {
+  display: flex;
+  justify-content: center;
+}
+.shopping-links {
+  display: flex;
+  justify-content: center;
+}
+.shopping-links a {
+  color: black;
+  text-decoration: none;
+  margin-right: 10px;
+  border-radius: 5px;
+  background-color: lightblue;
+  padding: 10px;
+  box-sizing: border-box;
+}

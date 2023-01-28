@@ -30,7 +30,7 @@ const Cart = () => {
   return (
     <div className="cart-wrapper" ref={cartRef}>
       <div className="cart-container">
-        <button type="submit" onClick={setShowCart(false)}></button>
+        {/* <button type="submit" onClick={setShowCart(false)}></button> */}
 
         {carto.length < 1 && (
           <div>
@@ -76,16 +76,19 @@ const Cart = () => {
                 </div>
               );
             })}
-          <p>
-            {carto.forEach((item) => {
-              return (price += item.price * item.quantity);
-            })}
-          </p>
-          {/* {totalPrice} */}
-          <p>{price}</p>
-          <Link to={"/"}>Go back to shopping</Link>
-          <Link to={"/shipping"}>Continue to Checkout</Link>
         </div>
+      </div>
+      <div class="shopping-cost">
+        {carto.forEach((item) => {
+          return (price += item.price * item.quantity);
+        })}
+
+        {/* {totalPrice} */}
+        <p>{price}</p>
+      </div>
+      <div class="shopping-links">
+        <Link to={"/"}>Go back to shopping</Link>
+        <Link to={"/shipping"}>Continue to Checkout</Link>
       </div>
     </div>
   );

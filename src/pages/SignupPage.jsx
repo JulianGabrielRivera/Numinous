@@ -56,7 +56,7 @@ const SignupPage = (props) => {
         style={{ height: "100vh", position: "relative" }}
       />
       <div className="signUpContainerInfo" style={{ position: "absolute" }}>
-        <h1>Sign UPPER!</h1>
+        <h1>Sign Up!</h1>
 
         <div
           style={{ display: "flex", justifyContent: "center", width: "100vw" }}

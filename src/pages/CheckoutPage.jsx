@@ -14,25 +14,12 @@ function ShippingInfoPage() {
     useContext(storeContext);
   const { storedToken } = useContext(AuthContext);
 
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_SERVER_URL}/api/saved-checkout`, {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      })
-      .then((response) => {
-        setCards(response.data.cards.cards);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
   //   Modal stuff
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [cards, setCards] = useState([]);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [address1, setAddress1] = useState("");
@@ -40,12 +27,6 @@ function ShippingInfoPage() {
   const [state, setState] = useState("");
   const [zipcode, setZipcode] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [nameOnCard, setNameOnCard] = useState("");
-  const [expirationMonth, setExpirationMonth] = useState("");
-  const [expirationYear, setExpirationYear] = useState("");
-  const [cardNumber, setCardNumber] = useState("");
-  const [securityCode, setSecurityCode] = useState("");
-  const [selectedCard, setSelectedCard] = useState("");
 
   const updateFirstName = (e) => setFirstName(e.target.value);
   const updateLastName = (e) => setLastName(e.target.value);
@@ -54,16 +35,7 @@ function ShippingInfoPage() {
   const updateState = (e) => setState(e.target.value);
   const updateZipcode = (e) => setZipcode(+e.target.value);
   const updatePhoneNumber = (e) => setPhoneNumber(+e.target.value);
-  const updateCardNumber = (e) => setCardNumber(+e.target.value);
-  const updateNameOnCard = (e) => setNameOnCard(e.target.value);
-  const updateMonthExpires = (e) => {
-    setExpirationMonth(e.target.value);
-  };
-  const updateYearExpires = (e) => setExpirationYear(+e.target.value);
-  const updateSecurityCode = (e) => setSecurityCode(+e.target.value);
-  console.log(selectedCard);
-  console.log(cardNumber);
-  console.log(expirationMonth);
+
   const submitForm = (e) => {
     e.preventDefault();
 
@@ -77,13 +49,6 @@ function ShippingInfoPage() {
       phoneNumber,
     };
 
-    const paymentObject = {
-      nameOnCard,
-      creditCard: cardNumber,
-      expirationMonth,
-      expirationYear,
-      securityCode,
-    };
     console.log(totalPrice);
     console.log(addressObject);
     const authToken = localStorage.getItem("authToken");
@@ -91,7 +56,7 @@ function ShippingInfoPage() {
     axios
       .post(
         `${process.env.REACT_APP_SERVER_URL}/api/new-order`,
-        { cartItems, addressObject, totalPrice, paymentObject },
+        { cartItems, addressObject, totalPrice },
         {
           headers: {
             authorization: `Bearer ${authToken}`,
@@ -164,12 +129,20 @@ function ShippingInfoPage() {
                   {/* <div style={{ display: "flex", flexDirection: "column" }}> */}
                   <h1 style={{ fontSize: "20px" }}>{item.name}</h1>
                   <p>{item.price}</p>
+                  <p>quantity: {item.quantity}</p>
+                  <p>total: {item.quantity * item.price}</p>
                   {/* </div> */}
                   {/* </div> */}
                 </>
               );
             })}
-            <button className="btn btn-secondary bt-lg mt-3" type="submit">
+            <button
+              onClick={() => {
+                confirmation();
+              }}
+              className="btn btn-secondary bt-lg mt-3"
+              type="submit"
+            >
               Place your order
             </button>
           </div>

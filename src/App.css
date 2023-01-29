@@ -256,7 +256,7 @@ select {
   display: flex;
   width: 100%;
   justify-content: space-between;
-  margin-top: 30px;
+  align-items: center;
   flex-direction: row;
   height: 100vh;
   text-align: right;
@@ -286,6 +286,9 @@ select {
   display: flex;
   width: 100vw;
   justify-content: space-around;
+}
+.checkoutForm input {
+  margin: 5px;
 }
 /* .checkoutContainer form {
   display: flex;

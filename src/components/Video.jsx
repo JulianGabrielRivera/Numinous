@@ -1,4 +1,12 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, {
+  useEffect,
+  useState,
+  useContext,
+  useRef,
+  createRef,
+} from "react";
+import Typewriter from "typewriter-effect";
+
 import { storeContext } from "../context/store.context";
 import { AuthContext } from "../context/auth.context";
 
@@ -8,15 +16,28 @@ import "animate.css";
 import axios from "axios";
 import SearchBar from "./SearchBar";
 import { StarIcon } from "@heroicons/react/solid";
+import { clear } from "@testing-library/user-event/dist/clear";
 
 const API_URL = process.env.REACT_APP_SERVER_URL;
 const Video = (props) => {
   const { filterState, filterDataClone, filterPlacesByString, likess } = props;
 
+  const continentName = useRef([
+    createRef(),
+    createRef(),
+    createRef(),
+    createRef(),
+    createRef(),
+    createRef(),
+  ]);
+  const numinousTitle = useRef();
+
   const { storedToken, totalLikes, setTotalLiked } = useContext(AuthContext);
   const [oneContinent, setContinent] = useState("");
   const [filterData, setFilterData] = useState([]);
   const [placesLiked, setTotalPlacesLiked] = useState();
+  const [run, setRun] = useState(0);
+
   const continents = [
     "South America",
     "North America",
@@ -26,6 +47,23 @@ const Video = (props) => {
     "Africa",
   ];
 
+  let id;
+  useEffect(() => {
+    let titulo = "Numinous";
+
+    id = setInterval(() => {
+      console.log("yo");
+      setRun((prevCount) => prevCount + 1);
+      numinousTitle.current.innerText += titulo[run];
+    }, 80);
+    if (run >= 8) {
+      clearInterval(id);
+    }
+
+    return () => {
+      clearInterval(id);
+    };
+  }, [run]);
   let carto = localStorage.getItem("cart");
   carto = JSON.parse(carto);
   // console.log(carto);
@@ -109,7 +147,8 @@ const Video = (props) => {
         />
 
         <div className="centered">
-          <h1 className="numinous-title">Numinous</h1>
+          <h1 ref={numinousTitle} className="numinous-title"></h1>
+          <aside>Create memories that will last a lifetime</aside>
         </div>
       </div>
       <div className="videoButtonContainer">
@@ -124,7 +163,16 @@ const Video = (props) => {
                 allPlaces();
               }}
             >
-              Show All
+              <Typewriter
+                options={{
+                  strings: ["Show All"],
+                  autoStart: true,
+                  loop: true,
+                  delay: 60,
+                  pauseFor: 1000000000,
+                  cursor: "",
+                }}
+              />
             </button>
             {/* map will create button for each item in the array then handlebutton function will receive the same value of item of array which would be string and filter function would filter based on value of each item */}
             {/*  if it was bigger we would create an array and foreach item of array it would filter the string */}
@@ -135,8 +183,20 @@ const Video = (props) => {
                   onClick={() => {
                     handleContinent(continent);
                   }}
+                  ref={continentName.current[i]}
+                  className="texto"
                 >
-                  {continent}
+                  <Typewriter
+                    options={{
+                      strings: [continent],
+                      autoStart: true,
+                      loop: true,
+                      delay: 60,
+                      pauseFor: 1000000000,
+                      cursor: "",
+                    }}
+                  />
+                  {/* {continent} */}
                 </button>
               );
             })}
@@ -174,7 +234,16 @@ const Video = (props) => {
           {continents.map((continent, i) => {
             return (
               <option key={i} value={continent}>
-                {continent}
+                <Typewriter
+                  options={{
+                    strings: [continent],
+                    autoStart: true,
+                    loop: true,
+                    delay: 60,
+                    pauseFor: 1000000000,
+                    cursor: "",
+                  }}
+                />
               </option>
             );
           })}

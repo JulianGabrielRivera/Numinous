@@ -150,7 +150,7 @@ const PlacesDetails = (props) => {
             return (
               <div style={{ display: "flex" }}>
                 <span style={{ marginRight: "0.8rem" }}>
-                  {comment.author.name}
+                  {comment.author.name ? comment.author.name : ""}
                 </span>
                 <p>{comment.content}</p>
               </div>

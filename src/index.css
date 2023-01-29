@@ -56,3 +56,11 @@ code {
   padding: 10px;
   box-sizing: border-box;
 }
+
+.texto {
+  font-size: 0;
+}
+.memories {
+  color: white;
+  font-weight: bold;
+}

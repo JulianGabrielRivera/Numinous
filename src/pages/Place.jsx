@@ -52,7 +52,7 @@ const Place = (props) => {
   return (
     <motion.div className="imageContainer">
       {filterDataClone.map((place, i) => {
-        console.log(place, i);
+        // console.log(place, i);
         return (
           <div key={place._id}>
             <div

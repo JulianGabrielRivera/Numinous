@@ -60,9 +60,7 @@ const FilterPlaces = (props) => {
                   onClick={() => {
                     filteredPlaces(continent);
                   }}
-                >
-                  {continent}
-                </button>
+                ></button>
               );
             })}
 

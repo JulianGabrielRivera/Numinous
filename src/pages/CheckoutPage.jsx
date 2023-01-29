@@ -118,169 +118,41 @@ function ShippingInfoPage() {
       <div className="checkoutContainer">
         <form className="checkoutForm" onSubmit={submitForm}>
           <div>
+            <h3> Shipping details</h3>
+
+            <label>First Name</label>
+            <input type="text" value={firstName} onChange={updateFirstName} />
+
             <div>
-              <h3> Shipping details</h3>
+              <label>Last Name</label>
+              <input type="text" value={lastName} onChange={updateLastName} />
+            </div>
 
-              <label>First Name</label>
-              <input type="text" value={firstName} onChange={updateFirstName} />
+            <div>
+              <label>Address Line 1</label>
+              <input type="text" value={address1} onChange={updateAddress1} />
+            </div>
 
-              <div>
-                <label>Last Name</label>
-                <input type="text" value={lastName} onChange={updateLastName} />
-              </div>
-
-              <div>
-                <label>Address Line 1</label>
-                <input type="text" value={address1} onChange={updateAddress1} />
-              </div>
-
-              <div>
-                <label>City</label>
-                <input type="text" value={city} onChange={updateCity} />
-              </div>
-              <div>
-                <label>State</label>
-                <input type="text" value={state} onChange={updateState} />
-              </div>
-              <div>
-                <label>Zip Code</label>
-                <input type="text" value={zipcode} onChange={updateZipcode} />
-              </div>
-              <div>
-                <label>Phone Number</label>
-                <input
-                  type="text"
-                  value={phoneNumber}
-                  onChange={updatePhoneNumber}
-                />
-              </div>
+            <div>
+              <label>City</label>
+              <input type="text" value={city} onChange={updateCity} />
             </div>
             <div>
-              <h3>Payment method</h3>
-              <h5>
-                <b>Your credit or debit cards</b>
-              </h5>
-              {/* <div className="savedCardInfo"> */}
-              {cards.map((card) => {
-                return (
-                  <>
-                    <div className="savedCardInfo">
-                      {/* <input
-                      type="checkbox"
-                      value={selectedCard}
-                      onClick={(e) => {
-                        setSelectedCard({ ...card });
-                      }}
-                    /> */}
-                      {/* <label htmlFor="coding"> */}
-                      <p> {card.nameOnCard}</p>
-                      <p>
-                        {card.expirationMonth}/{card.expirationYear}
-                      </p>
-                      <p>{card.creditCard}</p>
-                      {/* </label> */}
-                    </div>
-                  </>
-                );
-              })}
-
-              <Button variant="primary" onClick={handleShow}>
-                Add a credit or debit card
-              </Button>
+              <label>State</label>
+              <input type="text" value={state} onChange={updateState} />
             </div>
-            <>
-              <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Add a credit or debit card</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <Form>
-                    <Form.Group
-                      className="mb-3"
-                      controlId="exampleForm.ControlInput1"
-                    >
-                      <Form.Label>Name on card</Form.Label>
-                      <Form.Control
-                        type="text"
-                        value={nameOnCard}
-                        onChange={updateNameOnCard}
-                      />
-                    </Form.Group>
-                    <Form.Group
-                      className="mb-3"
-                      controlId="exampleForm.ControlTextarea1"
-                    >
-                      <Form.Label>Expiration Date</Form.Label>
-                      <select
-                        value={expirationMonth}
-                        onChange={updateMonthExpires}
-                      >
-                        <option>01</option>
-                        <option>02</option>
-                        <option>03</option>
-                        <option>04</option>
-                        <option>05</option>
-                        <option>06</option>
-                        <option>07</option>
-                        <option>08</option>
-                        <option>09</option>
-                        <option>10</option>
-                        <option>11</option>
-                        <option>12</option>
-                      </select>
-                      <select
-                        value={expirationYear}
-                        onChange={updateYearExpires}
-                      >
-                        <option>2022</option>
-                        <option>2023</option>
-                        <option>2024</option>
-                        <option>2025</option>
-                        <option>2026</option>
-                        <option>2027</option>
-                        <option>2028</option>
-                        <option>2029</option>
-                        <option>2030</option>
-                        <option>2031</option>
-                        <option>2032</option>
-                        <option>2033</option>
-                      </select>
-                    </Form.Group>
-
-                    <Form.Group
-                      className="mb-3"
-                      controlId="exampleForm.ControlTextarea1"
-                    >
-                      <Form.Label>Card number</Form.Label>
-                      <Form.Control
-                        type="text"
-                        value={cardNumber}
-                        onChange={updateCardNumber}
-                      />
-                    </Form.Group>
-                    <Form.Group
-                      className="mb-3"
-                      controlId="exampleForm.ControlTextarea1"
-                    >
-                      <Form.Label>Security Code</Form.Label>
-                      <Form.Control
-                        type="text"
-                        value={securityCode}
-                        onChange={updateSecurityCode}
-                      />
-                    </Form.Group>
-                  </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={handleClose}>
-                    Close
-                  </Button>
-                  <Button variant="primary" onClick={handleClose}>
-                    Add your card
-                  </Button>
-                </Modal.Footer>
-              </Modal>
-            </>
+            <div>
+              <label>Zip Code</label>
+              <input type="text" value={zipcode} onChange={updateZipcode} />
+            </div>
+            <div>
+              <label>Phone Number</label>
+              <input
+                type="text"
+                value={phoneNumber}
+                onChange={updatePhoneNumber}
+              />
+            </div>
           </div>
           <div>
             <h3>Items and shipping</h3>

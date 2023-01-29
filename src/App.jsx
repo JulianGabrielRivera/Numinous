@@ -9,7 +9,6 @@ import IsAnon from "./components/IsAnon";
 import IsPrivate from "./components/IsPrivate";
 import IsAdmin from "./components/IsAdmin";
 import LoginPage from "./pages/LoginPage";
-import Places from "./pages/Places";
 import PlacesDetails from "./pages/PlacesDetails";
 import SignupPage from "./pages/SignupPage";
 import PlacesCreate from "./pages/PlacesCreate";
@@ -17,9 +16,6 @@ import EditProfile from "./pages/EditProfile";
 import HomePage from "./pages/HomePage";
 import Cart from "./pages/Cart";
 import PastOrders from "./pages/PastOrders";
-import Video from "./components/Video";
-
-import SearchBar from "./components/SearchBar";
 
 import axios from "axios";
 import ShippingInfoPage from "./pages/CheckoutPage";

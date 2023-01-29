@@ -148,8 +148,22 @@ const Video = (props) => {
 
         <div className="centered">
           <h1 ref={numinousTitle} className="numinous-title"></h1>
-          <aside>Create memories that will last a lifetime</aside>
+
+          {/* <aside>Create memories that will last a lifetime</aside> */}
+          <div class="memories">
+            <Typewriter
+              options={{
+                strings: ["Create memories that will last a lifetime"],
+                autoStart: true,
+                loop: true,
+                delay: 60,
+                pauseFor: 2000,
+                cursor: "",
+              }}
+            />
+          </div>
         </div>
+        <div></div>
       </div>
       <div className="videoButtonContainer">
         <SearchBar

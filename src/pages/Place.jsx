@@ -9,6 +9,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { motion } from "framer-motion";
 import { useDrag } from "react-dnd";
+
+import Chat from "../components/Chat";
+
 // const APIURL = process.env.REACT_APP_SERVER_URL;
 const Place = (props) => {
   const [newPlace, setNewPlace] = useState([]);
@@ -317,6 +320,7 @@ const Place = (props) => {
           </div>
         );
       })}
+      <Chat />
     </motion.div>
   );
 };

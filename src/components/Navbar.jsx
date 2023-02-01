@@ -16,7 +16,7 @@ const Navbar = () => {
             </Link>
             {!isLoggedIn && (
               <Link to="/signup">
-                <button>Sign UPPER!</button>
+                <button>Sign Up</button>
               </Link>
             )}
 

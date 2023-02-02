@@ -8,7 +8,7 @@ const socket = io.connect("http://localhost:5005");
 const Chat = () => {
   const [message, setMessage] = useState("");
   const [list, setMessageList] = useState([]);
-  const { user } = useContext(AuthContext);
+  const { user, authToken } = useContext(AuthContext);
   const [room, setRoom] = useState("");
   const [time, setTime] = useState("");
   const [messages, setMessages] = useState([]);
@@ -20,15 +20,13 @@ const Chat = () => {
       socket.emit("send_message", {
         room: "main",
         message,
-        username: user.name,
+        user: user._id,
         time:
           new Date(Date.now()).getHours() +
           ":" +
           new Date(Date.now()).getMinutes(),
       });
     console.log(room);
-
-    setMessageList([...list, { room, message, time }]);
   };
 
   useEffect(() => {
@@ -44,18 +42,28 @@ const Chat = () => {
     // );
 
     socket.on("receive_message", (data) => {
-      console.log(data);
-      setTime(data.time);
-      setMessages([...messages, data]);
-      setMessageList([...list, data]);
-      console.log(list);
+      axios
+        .get(`${process.env.REACT_APP_SERVER_URL}/chat`, {
+          headers: {
+            authorization: `Bearer ${authToken}`,
+          },
+        })
+        .then((response) => {
+          setMessages(response.data.findAllofChat);
+          // console.log(response.data.findAllofChat);
+        });
+      //   console.log(data);
+      //   setTime(data.time);
+      //   setMessages([...messages, data]);
+      //   setMessageList([...list, data]);
       console.log(messages);
       //   setMessage(data.message);
     });
     console.log([...messages]);
   }, [socket]);
-  console.log(list);
-  console.log(socket);
+  console.log(user);
+  //   console.log(list);
+  //   console.log(socket);
   return (
     <>
       {show ? (
@@ -68,31 +76,36 @@ const Chat = () => {
               }}
             >
               <div className="chatP">
-                <p style={{ color: "white" }}>Numinous</p>
+                <p style={{ color: "white", marginTop: "13px" }}>Numinous</p>
               </div>
             </div>
             <div className="chat-body">
               {messages.map((el) => {
                 return (
                   <>
-                    <p
-                      style={{
-                        color: "black",
-                        fontWeight: "bold",
-                        marginLeft: "15px",
-                      }}
-                    >
-                      {el.message}
-                    </p>
-                    <p
-                      style={{
-                        color: "black",
-                        fontWeight: "bold",
-                        marginLeft: "15px",
-                      }}
-                    >
-                      {el.username}
-                    </p>
+                    {user && (
+                      <>
+                        <p
+                          className={
+                            user.name === el.user.name
+                              ? "chatRight"
+                              : "chatLeft"
+                          }
+                        >
+                          {el.message}
+                          {el.user.name}
+                        </p>
+                        {/* <p
+                          style={{
+                            color: "black",
+                            fontWeight: "bold",
+                            marginLeft: "255px",
+                          }}
+                        >
+                          {el.username}
+                        </p> */}
+                      </>
+                    )}
                   </>
                 );
               })}
@@ -130,7 +143,8 @@ const Chat = () => {
           >
             <div className="chat-header2">
               <div className="chatP2">
-                <p>Numinous</p>
+                <p>Numinous </p>
+                {!user && <p class="loginToChat">login to chat</p>}
               </div>
             </div>
           </div>

@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   position: fixed;
-  height: 350px;
+  height: 300px;
   right: 0;
   bottom: 0;
 }
@@ -16,7 +16,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  height: 350px;
+  height: 300px;
   width: 350px;
   background-color: #accbff;
   border: 1px solid #dbedff;
@@ -27,7 +27,7 @@
 }
 .chatContainer2 {
   display: flex;
-  height: 80px;
+  height: 70px;
   width: 350px;
   background-color: #accbff;
   border-radius: 7px;
@@ -38,28 +38,34 @@
 .chatP {
   color: white;
   font-weight: bold;
-  margin: 15px;
+  margin-left: 15px;
 }
 .chatP2 {
-  color: #dbedff;
+  color: white;
   font-weight: bold;
   margin-left: 15px;
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
   /* margin-top: 20px; */
 }
 .chat-header {
-  border-bottom: 1px dashed black;
-  border-left: 1px dashed black;
+  border-bottom: 1px dashed white;
+  border-left: 1px dashed white;
   border-radius: 7px;
 
-  margin: 10px;
+  margin-left: 15px;
+  margin-bottom: 45px;
 }
 .chat-header2 {
-  border-bottom: 1px dashed black;
-  border-left: 1px dashed black;
+  border-bottom: 1px dashed white;
+  border-left: 1px dashed white;
   border-radius: 7px;
-  margin: 20px;
-  width: 100%;
+  margin-left: 15px;
+  margin-bottom: 15px;
+  margin-top: 10px;
+  width: 100vw;
 }
 .chat-body {
   height: 250px;
@@ -68,6 +74,7 @@
   height: 120px;
   overflow: scroll;
   overflow-x: hidden;
+  position: relative;
   /* border-top: 1px dashed black;
   border-right: 1px dashed black;
   border-bottom: 1px dashed black; */
@@ -98,4 +105,29 @@
   width: 50px;
   height: 30px;
   background-color: #404040;
+}
+.chatRight {
+  color: white;
+  font-weight: bold;
+  margin-left: 250px;
+}
+.chatLeft {
+  color: black;
+  font-weight: bold;
+  margin-left: 15px;
+}
+.loginToChat {
+  margin-right: 20px;
+  text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
+}
+
+@media (max-width: 375px) {
+  .chatContainer2 {
+    width: 100vw;
+  }
+
+  /* video {
+    display: none;
+    background: url('./assets/images/beach4.jpg');
+  } */
 }
